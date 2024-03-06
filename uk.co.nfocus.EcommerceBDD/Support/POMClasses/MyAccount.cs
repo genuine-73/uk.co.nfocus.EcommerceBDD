@@ -79,9 +79,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             _OrdersButton.Click();
         }
 
-        // Grabs the latest order number from the orders tab within account
-        // Needed to check the assertions to see the order number from checkout matches the order number from the latest order 
-
         //Checks to see if login button is displayed
         //Used to find if we have successfully logged out
         public bool CheckLoginButton()

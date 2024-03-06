@@ -21,7 +21,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             myWait.Until(drv => drv.FindElement(locator).Enabled);
         }
 
-        public static void TakeFullPageScreenshot(IWebDriver driver, string filename, string subfolderName)
+        public static void TakeFullPageScreenshot(IWebDriver driver, string filename, string subfolderName = null)
         {
             //Stores the current time stamp of test
             string dateTime = (DateTime.UtcNow).ToString("dd-MMM-yyyy_HH-mm-ss");

@@ -6,14 +6,27 @@ Background:
 	When I navigate to the Shop page
 
 
-Scenario: Applying a coupon code
-	When I add an item to my cart
-	And apply coupon 'edgewords'
-	Then I should get ten percent off my selected item
+#Scenario: Applying a coupon code
+#	When I add an item to my cart
+#	And apply coupon 'edgewords'
+#	Then I should get 10% off my selected item
 
+
+@TestCaseOne
+Scenario Outline: Applying a coupon
+	When I add an '<item>' to my cart
+	And and view cart to apply coupon '<coupon>'
+	Then I should get '<discount>'% off my selected item
+Examples: 
+| item   | coupon    | discount |
+| Cap    | edgewords |    10    |
+| Beanie | edgewords |    15    |
+| Belt   | nfocus    |    25    |
+
+
+@TestCaseTwo
 Scenario: Placing an order
-	When I add an item to my cart
+	When I add an 'Belt' to my cart
 	And fill out the billing details to place an order in checkout
 	Then I should see an order summary
 	And access it from my orders portal
-

@@ -19,40 +19,35 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         private readonly ScenarioContext _scenarioContext;
         private IWebDriver _driver;
         private Cart _cart;
+        private NavBar _navbar;
         public ApplyingACouponStepDefinitions(ScenarioContext scenarioContext, WDWrapper wrapper)
         {
             _scenarioContext = scenarioContext;
             _driver = wrapper.Driver;
         }
 
-        [When(@"I add an item to my cart")]
-        public void WhenIAddAnItemCart()
-        {
-            //Instantiating Shop class and adding items to cart
-            Shop product = new Shop(_driver);
-            product.AddToCart();
-            product.ClickViewCart();
-            Console.WriteLine("Successfully added an item to cart");
-        }
 
-        [When(@"apply coupon '(.*)'")]
-        public void WhenApplyCoupon(string edgewords0)
+        [When(@"and view cart to apply coupon '(.*)'")]
+        public void WhenApplyCoupon(string coupon)
         {
+            _navbar = (NavBar)_scenarioContext["navbar"];
+            _navbar.GoToCart();
+
             //Entering Coupon and Apply
             _cart = new Cart(_driver);
-            _cart.EnterAndApplyCoupon("edgewords");
+            _cart.EnterAndApplyCoupon(coupon);
             Console.WriteLine("Successfully applied coupon code");
 
         }
 
-        [Then(@"I should get ten percent off my selected item")]
-        public void ThenIShouldGetOffMySelectedItem()
+        [Then(@"I should get '(.*)'% off my selected item")]
+        public void ThenIShouldGetOffMySelectedItem(string discount)
         {
 
             //Test to see if discount works
             try
             {
-                Assert.That(_cart.Discount, Is.EqualTo((decimal)0.10 * _cart.Price));
+                Assert.That(_cart.Discount, Is.EqualTo((ConvertToDecimal(discount)/100) * _cart.Price));
                 Console.WriteLine("The discount applied is correct!");
             }
             catch (Exception e)
@@ -75,6 +70,13 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 
             // Take Screenshot of Cart Page
             TakeFullPageScreenshot(_driver, "Coupon_Applied", "TestCaseOne");
+
+            //Clean up process. Getting rid of the coupon and item from the cart.
+            _cart = new Cart(_driver);
+            _cart.RemoveCoupon();
+            _cart.RemoveFromCart();
+            _cart.CheckCartIsEmpty();
+            //_cart.CheckCartIsEmpty2();
         }
     }
 }

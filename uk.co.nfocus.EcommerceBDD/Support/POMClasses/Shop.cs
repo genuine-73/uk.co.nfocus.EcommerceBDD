@@ -29,6 +29,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _addItemToCart => _driver.FindElement(By.LinkText("Add to cart"));
 
         private IDictionary<string, IWebElement> newElements = new Dictionary<string, IWebElement>(); //Stores clothing items and webelements as key-value pair
+        private static IDictionary<string, IWebElement> newElements2 = new Dictionary<string, IWebElement>(); //Stores clothing items and webelements as key-value pair
 
         //Service Method
         public void AddToCart()//Add item to cart
@@ -58,8 +59,31 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
 
         public void ClickProduct(string product)
         {
-            FillUpDict();
+            //FillUpDict();
             newElements[product].Click();   
+        }
+
+        public bool Containsitem(string item)
+        {
+            if (newElements.ContainsKey(item))
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+        public static void FillUpDict2(IWebDriver driver)
+        {
+            foreach (IWebElement elm in driver.FindElements(By.TagName("h2")))
+            {
+                newElements2[elm.Text] = elm;
+            }
+        }
+
+        public static void ClickProduct2(string product)
+        {
+            newElements2[product].Click();
         }
     }
 }

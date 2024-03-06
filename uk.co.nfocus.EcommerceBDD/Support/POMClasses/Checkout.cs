@@ -150,13 +150,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
 
         }
 
-        //Chooses Country from the drop down list
-        //<<NEED TO COME BACK TO IT LATER>>
-        public void ChooseCountry(string country)
-        {
-            new SelectElement(_country).SelectByText(country);
-        }
-
         //Checks if the Check Payment Radio Button has been selected
         public void CheckPayment()
         {
@@ -170,6 +163,50 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
                 Thread.Sleep(2000);
                 _checkPayments.Click();
             }
+        }
+
+        public Checkout SetFirstName(string firstname)
+        {
+            FirstName = firstname;
+            return this;
+        }
+
+        public Checkout SetSecondName(string secondName)
+        {
+            SecondName = secondName;
+            return this;
+        }
+
+        public Checkout SetAddress(string address)
+        {
+            Address = address;
+            return this;
+        }
+
+        public Checkout SetCity(string city)
+        {
+            City = city;
+            return this;
+        }
+
+        public Checkout SetPostCode(string postcode)
+        {
+            Postcode = postcode;
+            return this;
+        }
+
+        public Checkout SetPhoneNo(string phone)
+        {
+            PhoneNo = phone;
+            return this;
+        }
+
+        public Checkout SetCountry(string country)
+        {
+            StaticWaitForElement(_driver, By.Id("billing_country"));
+            SelectElement dropdown = new SelectElement(_driver.FindElement(By.Id("billing_country")));
+            dropdown.SelectByText(country);
+            return this;
         }
 
     }

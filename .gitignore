@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# runsettings
+C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\local.runsettings

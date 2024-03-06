@@ -34,9 +34,9 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _applyButton => _driver.FindElement(By.Name("apply_coupon")); //Finds the apply coupon button 
         private IWebElement _removeCoupon => _driver.FindElement(By.LinkText("[Remove]")); //Finds the [Remove] link to clear coupon 
         private IWebElement _price => _driver.FindElement(By.CssSelector("td.product-subtotal > span:nth-child(1) > bdi:nth-child(1)")); // Cost of the clothing item
-        private IWebElement _discount => _driver.FindElement(By.CssSelector("#post-5 > div > div > div.cart-collaterals > div > table > tbody > tr.cart-discount.coupon-edgewords > td > span")); // Cost of Discount
-        private IWebElement _shippingCost => _driver.FindElement(By.CssSelector("#shipping_method > li:nth-child(1) > label:nth-child(2) > span:nth-child(1) > bdi:nth-child(1)")); // Shipping cost
-        private IWebElement _total => _driver.FindElement(By.CssSelector(".order-total > td:nth-child(2) > strong:nth-child(1) > span:nth-child(1) > bdi:nth-child(1)")); // The total cost of price + shipping
+        private IWebElement _discount => _driver.FindElement(By.CssSelector(".cart-discount > td:nth-child(2) > span:nth-child(1)")); // Cost of Discount
+        private IWebElement _shippingCost => _driver.FindElement(By.CssSelector("#shipping_method > li:nth-child(1) > label:nth-child(2) > span:nth-child(1)")); // Shipping cost
+        private IWebElement _total => _driver.FindElement(By.CssSelector(".order-total > td:nth-child(2)")); // The total cost of price + shipping
         private IWebElement _returnToShop => _driver.FindElement(By.LinkText("Return to shop"));
         
         //getters and setters for various fields such as: coupons, price, discount etc.
@@ -67,7 +67,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             get
             {
-                StaticWaitForElement(_driver, By.CssSelector("#post-5 > div > div > div.cart-collaterals > div > table > tbody > tr.cart-discount.coupon-edgewords > td > span"));
+                StaticWaitForElement(_driver, By.CssSelector(".cart-discount > td:nth-child(2) > span:nth-child(1)"));
                 return ConvertToDecimal(_discount.Text);
             }
         }
@@ -129,6 +129,22 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             _removeCoupon.Click();
         }
 
+        public void CheckCartIsEmpty2()
+        {
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));// Waits to see if the coupon remove link is there
+            while (wait.Until(drv => drv.FindElements(By.LinkText("×")).Count != 0))
+            {
+                try
+                {
+                    Thread.Sleep(1500);
+                    _removeItem.Click();
+                }
+                catch
+                {
+                    break;
+                }
+            }
+        }
     }
 }
 

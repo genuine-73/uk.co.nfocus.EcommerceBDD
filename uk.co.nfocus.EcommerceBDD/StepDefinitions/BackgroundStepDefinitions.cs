@@ -24,7 +24,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _scenarioContext = scenarioContext;
             this._driver = wrapper.Driver;
         }
-        [Given(@"I am on the login page")]
+        [Given(@"(?:I|i) am on the login page")]
         public void GivenIAmOnTheLoginPage()
         {
             //Instantiating navigation bar
@@ -43,12 +43,14 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             Console.WriteLine("Successfully navigated to MyAccount Page");
         }
 
-        [Given(@"I have logged in using valid credentials")]
+        [Given(@"(?:I|i) have logged in using valid credentials")]
         public void GivenIHaveLoggedInUsingValidCredentials()
         {
             _myAccount = new MyAccount(_driver);
-            //bool loggedIn = myAccount.LoginExpectSuccess("helloGen@edgewords.co.uk","HelloEdgewords!23");
-            bool loggedIn = _myAccount.LoginExpectSuccess("helloGen@edgewords.co.uk", "HelloEdgewords!23");
+            //bool loggedIn = _myAccount.LoginExpectSuccess("helloGen@edgewords.co.uk","HelloEdgewords!23");
+            string username = Environment.GetEnvironmentVariable("SECRET_USERNAME");
+            string password = Environment.GetEnvironmentVariable("SECRET_PASSWORD");
+            bool loggedIn = _myAccount.LoginExpectSuccess(username, password);
             Assert.That(loggedIn, Is.True, "We did not login");
             Console.WriteLine("Successfully logged in");
         }
