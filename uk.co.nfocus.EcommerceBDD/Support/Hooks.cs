@@ -11,15 +11,11 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.DevTools.V120.Browser;
 using OpenQA.Selenium.DevTools.V120.FedCm;
+using static uk.co.nfocus.EcommerceBDD.Support.StaticHelperLib;
 
 //TODO:
-//POCO -> Add billing information in scenario
-//Try and get rid of Thread.Sleep(2000) from delete all from cart and checkpayments method as well
-//Write a better way to closedown since in TestCaseTwo goes back to my account and then logouts instead of just logging out
 //Add comments and make it more readable
-//For Account navbar should I go for abstract or interface
 //Scroll down to screenshot webelements
-//Do living Doc for reporting and better reporting
 
 
 namespace uk.co.nfocus.EcommerceBDD.Support
@@ -27,24 +23,29 @@ namespace uk.co.nfocus.EcommerceBDD.Support
     [Binding]
     public class Hooks
     {
+        //declaring variables for all the classes that will be used
         private IWebDriver _driver; 
         private readonly ScenarioContext _scenarioContext;
         private readonly WDWrapper _wrapper;
         private NavBar _navbar;
         private MyAccount _myAccount;
+        private Cart _cart;
+
+        //Initialises the variables when called 
         public Hooks(ScenarioContext scenarioContext, WDWrapper wrapper)
         {
             _scenarioContext = scenarioContext;
             _wrapper = wrapper;
         }
 
-        [Before] //Hooks can be made specific to certain tags
+        [Before] //Runs beore every scenario
         public void SetUpUsingTypeSafeWrapper()
         {
 
-            //Helps to choose which web browser to open up
+            //Retrieves the enviornment variable browser set on .runsettings file
             string browser = Environment.GetEnvironmentVariable("BROWSER");
-            //string browser = "firefox";
+
+            //picks a browser from the options below
             switch (browser)
             {
                 case "firefox":
@@ -59,8 +60,9 @@ namespace uk.co.nfocus.EcommerceBDD.Support
                     _driver = new ChromeDriver();
                     break;
 
+                //Sanitation check in case browser is null
                 default:
-                    _driver = new EdgeDriver(); //Sanitation check in case browser is null
+                    _driver = new FirefoxDriver(); 
                     break;
 
             }
@@ -77,21 +79,43 @@ namespace uk.co.nfocus.EcommerceBDD.Support
         }
 
 
-        [After]
+        [After] // Runs after every scenario
         public void TearDown()
         {
+
             _navbar = new NavBar(_driver);
-            _navbar.GoToAccount();
+            _myAccount = (MyAccount)_scenarioContext["_myAccount"]; // 
+            if (_driver.Url.Equals("https://www.edgewordstraining.co.uk/demo-site/cart/"))
+            {
+                try
+                {
+                    //Clean up process. Getting rid of the coupon and all of the items from the cart
+                    _cart = new Cart(_driver);
+                    _cart.CartCleanUp();
+                }
+                catch
+                {
+                    //Takes a screenshot if anything
+                    TakeFullPageScreenshot(_driver, "Deleting items from cart error");
+                }
+                //Go to my account
+                _navbar.GoToAccount();
 
-            //Logs you out
-            _myAccount = new MyAccount(_driver);
-            bool loggedout = _myAccount.LogoutExpectSuccess();
+                //Logs the user out of my account
+                bool loggedout = _myAccount.LogoutExpectSuccess();
+                Assert.That(loggedout, Is.True, "We did not logout");
+                Console.WriteLine("Successfully logsout of the account");
+            }
+            else
+            {
+                //Runs after test case two as there is a logout button available in the Account Navigaton Bar
+                //Logs the user out of the account
+                bool loggedout = _myAccount.LogoutExpectSuccess();
+                Assert.That(loggedout, Is.True, "We did not logout");
+                Console.WriteLine("Successfully logsout of the account");
+            }
 
-
-            Assert.That(loggedout, Is.True, "We did not logout");
-            Console.WriteLine("Successfully logsout of the account");
-
-            //Quits browser and DriverServer and disposes of objects (although NUnit Analyser does not know this without further config)
+            // Closes the browser correctly
             _driver.Quit();
             Console.WriteLine("Successfully closes down the browser");
 

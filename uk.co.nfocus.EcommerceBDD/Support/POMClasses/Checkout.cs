@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static uk.co.nfocus.EcommerceBDD.Support.StaticHelperLib;
+using NUnit.Framework;
 
 namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
 {
@@ -15,15 +16,16 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
     {
         private IWebDriver _driver;
 
-        //Constructor
+        //Creates an instance of the Checkout class
+        //Initialises the driver variable when constructed
         public Checkout(IWebDriver driver)
         {
             _driver = driver;
-
+            Assert.That(_driver.Url, Is.EqualTo("https://www.edgewordstraining.co.uk/demo-site/checkout/"));
         }
 
         // Locators for finding Elements to fill out the Billing information
-        private IWebElement _firstName => _driver.FindElement(By.Id("billing_first_name"));
+        private IWebElement _firstName => _driver.FindElement(By.Id("billing_first_name")); 
         private IWebElement _secondName => _driver.FindElement(By.Id("billing_last_name"));
         private IWebElement _address => _driver.FindElement(By.Id("billing_address_1"));
         private IWebElement _city => _driver.FindElement(By.Id("billing_city"));
@@ -31,11 +33,11 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _phoneNo => _driver.FindElement(By.Id("billing_phone"));
         private IWebElement _placeOrder => _driver.FindElement(By.Id("place_order"));
         private IWebElement _country => _driver.FindElement(By.Id("select2-billing_country-container"));
-        private IWebElement _checkPayments => _driver.FindElement(By.CssSelector("li.wc_payment_method:nth-child(1)"));
-        private IWebElement _anotherPayment => _driver.FindElement(By.Id("payment_method_cheque"));
+        private IWebElement _checkPayments => _driver.FindElement(By.Id("payment_method_cheque"));
+        private IWebElement _cashOnDelivery => _driver.FindElement(By.Id("payment_method_cod"));
+        
         //Service Methods
-        //Getters and Setters for all of the fields
-
+        //Getters and Setters for all of the billing details fields
         public string FirstName
         {
             get
@@ -45,7 +47,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
             set
             {
-                _firstName.Clear();
+                _firstName.Clear(); 
                 _firstName.SendKeys(value);
             }
         }
@@ -124,28 +126,71 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
 
         //Service Methods
         //Fills the billing details needed to check payment and place an order
-        public void WriteOutBillingDetails(string firstName, string secondName, string address, string city, string postcode, string phoneNo)
+
+        //Sets the first name
+        public Checkout SetFirstName(string firstname)
         {
-            FirstName = firstName;
+            FirstName = firstname;
+            return this;
+        }
+        //Sets the surname
+        public Checkout SetSecondName(string secondName)
+        {
             SecondName = secondName;
+            return this;
+        }
+        //Sets the address
+        public Checkout SetAddress(string address)
+        {
             Address = address;
+            return this;
+        }
+        //Sets the city
+        public Checkout SetCity(string city)
+        {
             City = city;
-            Postcode = postcode;
-            PhoneNo = phoneNo;
+            return this;
         }
 
+        //Sets the Postcode
+
+        public Checkout SetPostCode(string postcode)
+        {
+            Postcode = postcode;
+            return this;
+        }
+
+        //Sets the Phone number
+        public Checkout SetPhoneNo(string phone)
+        {
+            PhoneNo = phone;
+            return this;
+        }
+
+        //Chooses the country from the dropdown list
+        public Checkout SetCountry(string country)
+        {
+            StaticWaitForElement(_driver, By.Id("billing_country"));
+            SelectElement dropdown = new SelectElement(_driver.FindElement(By.Id("billing_country")));
+            dropdown.SelectByText(country);
+            return this;
+        }
+        
         //Clicks Place Order button to complete transaction
         public void ClickPlaceOrder()
         {
+
             try
             {
+                //try to search for element and click it when found
                 StaticWaitForElement(_driver, By.Id("place_order"), 7);
                 _placeOrder.Click();
             }
             catch (Exception)
             {
-                _checkPayments.Click();
-                _placeOrder.Click();
+                //_checkPayments.Click();
+                //_placeOrder.Click();
+                ClickElementInView(_driver, _placeOrder);
             }
 
         }
@@ -160,53 +205,11 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
             catch
             {
-                Thread.Sleep(2000);
-                _checkPayments.Click();
+                //Thread.Sleep(2000);
+                //_checkPayments.Click();
+                ScrollElementIntoView(_driver, _checkPayments);
+                ClickElementInView(_driver, _checkPayments);
             }
-        }
-
-        public Checkout SetFirstName(string firstname)
-        {
-            FirstName = firstname;
-            return this;
-        }
-
-        public Checkout SetSecondName(string secondName)
-        {
-            SecondName = secondName;
-            return this;
-        }
-
-        public Checkout SetAddress(string address)
-        {
-            Address = address;
-            return this;
-        }
-
-        public Checkout SetCity(string city)
-        {
-            City = city;
-            return this;
-        }
-
-        public Checkout SetPostCode(string postcode)
-        {
-            Postcode = postcode;
-            return this;
-        }
-
-        public Checkout SetPhoneNo(string phone)
-        {
-            PhoneNo = phone;
-            return this;
-        }
-
-        public Checkout SetCountry(string country)
-        {
-            StaticWaitForElement(_driver, By.Id("billing_country"));
-            SelectElement dropdown = new SelectElement(_driver.FindElement(By.Id("billing_country")));
-            dropdown.SelectByText(country);
-            return this;
         }
 
     }

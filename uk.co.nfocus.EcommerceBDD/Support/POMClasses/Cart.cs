@@ -110,7 +110,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             {
                 WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));// Waits to see if the coupon remove link is there
                 wait.Until(drv => drv.FindElements(By.LinkText("[Remove]")).Count == 0);// If there arent any, then we can proceed to delete item from cart
-                                                                                        //Thread.Sleep(2000);
+                //Thread.Sleep(2000);
                 _removeItem.Click();
             }
 
@@ -129,15 +129,18 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             _removeCoupon.Click();
         }
 
-        public void CheckCartIsEmpty2()
+        //Deletes all item from cart
+        public void DeleteItemsFromCart()
         {
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));// Waits to see if the coupon remove link is there
-            while (wait.Until(drv => drv.FindElements(By.LinkText("×")).Count != 0))
+            while (wait.Until(drv => drv.FindElements(By.LinkText("×")).Count > 0))
             {
+
                 try
                 {
-                    Thread.Sleep(1500);
-                    _removeItem.Click();
+                    //Thread.Sleep(2000);
+                    //_removeItem.Click();
+                    ClickElementInView(_driver, _removeItem);
                 }
                 catch
                 {
@@ -145,28 +148,14 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
                 }
             }
         }
+
+        //Cart Clean Up Process
+        public void CartCleanUp()
+        {
+            RemoveCoupon();//Removes coupon
+            DeleteItemsFromCart();//Removes item from cart
+            CheckCartIsEmpty(); //Check if cart is empty and clicks return to shop
+        }
     }
 }
 
-/*
- *  public void RemoveCartItems()
-        {
-            //While items are in cart loops, removing the top item until no element is found using try cattch
-            bool inCart = true;
-            while (inCart)
-            {
-
-                try
-                {
-                    IWebElement itemHere = removeItem;
-                    itemHere.Click();
-                    Thread.Sleep(1500);
-                    inCart = true;
-                }
-                catch (NoSuchElementException)
-                {
-                    inCart = false;
-                }
-            }
-        }
- */

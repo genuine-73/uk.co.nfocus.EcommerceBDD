@@ -30,6 +30,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         [When(@"and view cart to apply coupon '(.*)'")]
         public void WhenApplyCoupon(string coupon)
         {
+            //Navigates to cart
             _navbar = (NavBar)_scenarioContext["navbar"];
             _navbar.GoToCart();
 
@@ -71,12 +72,6 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             // Take Screenshot of Cart Page
             TakeFullPageScreenshot(_driver, "Coupon_Applied", "TestCaseOne");
 
-            //Clean up process. Getting rid of the coupon and item from the cart.
-            _cart = new Cart(_driver);
-            _cart.RemoveCoupon();
-            _cart.RemoveFromCart();
-            _cart.CheckCartIsEmpty();
-            //_cart.CheckCartIsEmpty2();
         }
     }
 }

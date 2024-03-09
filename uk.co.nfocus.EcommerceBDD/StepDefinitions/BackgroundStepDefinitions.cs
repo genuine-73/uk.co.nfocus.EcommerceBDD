@@ -14,11 +14,13 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
     [Binding]
     internal class BackgroundStepDefinitions
     {
+        //Variable declaration
         private readonly ScenarioContext _scenarioContext;
         private IWebDriver _driver;
         private NavBar _navbar;
         private MyAccount _myAccount;
 
+        //BackgroundStepDefinition Constructor
         public BackgroundStepDefinitions(ScenarioContext scenarioContext, WDWrapper wrapper)
         {
             _scenarioContext = scenarioContext;
@@ -47,12 +49,17 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         public void GivenIHaveLoggedInUsingValidCredentials()
         {
             _myAccount = new MyAccount(_driver);
-            //bool loggedIn = _myAccount.LoginExpectSuccess("helloGen@edgewords.co.uk","HelloEdgewords!23");
+            //retrieves the username environment variable set in .runsettings
             string username = Environment.GetEnvironmentVariable("SECRET_USERNAME");
-            string password = Environment.GetEnvironmentVariable("SECRET_PASSWORD");
+            //retrieves the password environment varibale set in .runsettings
+            string password = Environment.GetEnvironmentVariable("SECRET_PASSWORD"); 
+           
+            //Checks if you have successully logged in
             bool loggedIn = _myAccount.LoginExpectSuccess(username, password);
             Assert.That(loggedIn, Is.True, "We did not login");
             Console.WriteLine("Successfully logged in");
+            
+            _scenarioContext["_myAccount"] = _myAccount;
         }
 
         [When(@"I navigate to the Shop page")]

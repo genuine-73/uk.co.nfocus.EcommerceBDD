@@ -12,8 +12,11 @@ using NUnit.Framework;
 
 namespace uk.co.nfocus.EcommerceBDD.Support
 {
+
     internal class StaticHelperLib
     {
+        private static IJavaScriptExecutor? jsdriver;
+        
         //Helper method to wait for element to load.
         public static void StaticWaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5)
         {
@@ -38,18 +41,24 @@ namespace uk.co.nfocus.EcommerceBDD.Support
         // Calculates the discount
         public static decimal ConvertToDecimal(string price)
         {
-            var style = NumberStyles.Currency | NumberStyles.AllowCurrencySymbol;
-            var provider = new CultureInfo("en-GB");
+            NumberStyles style = NumberStyles.Currency | NumberStyles.AllowCurrencySymbol;
+            CultureInfo provider = new CultureInfo("en-GB");
             return decimal.Parse(price, style, provider);
         }
 
         //Scroll down to chosen element
         public static void ScrollElementIntoView(IWebDriver driver, IWebElement element)
         {
-            IJavaScriptExecutor? jsdriver = driver as IJavaScriptExecutor;
+            jsdriver = driver as IJavaScriptExecutor;
             jsdriver?.ExecuteScript("arguments[0].scrollIntoView()", element);
         }
 
+        //Click on the chosen element
+        public static void ClickElementInView(IWebDriver driver, IWebElement element)
+        {
+            jsdriver = driver as IJavaScriptExecutor;
+            jsdriver?.ExecuteScript("arguments[0].click()", element);
+        }
     }
 }
 

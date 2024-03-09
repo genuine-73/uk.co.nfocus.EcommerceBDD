@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="6827f0c9-fb08-423b-819e-06995fcb6ad9" name="GenuineMathew@DESKTOP-MOLHKHA 2024-03-07 14:41:41" runUser="AzureAD\GenuineMathew" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2024-03-07T14:41:41.5174370+00:00" queuing="2024-03-07T14:41:41.5174373+00:00" start="2024-03-07T14:41:18.8707527+00:00" finish="2024-03-07T14:42:42.3086180+00:00" />
+  <TestSettings name="default" id="eb37195f-ca38-4729-9bd0-01a8240bc2f1">
+    <Deployment runDeploymentRoot="GenuineMathew_DESKTOP-MOLHKHA_2024-03-07_14_41_41" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="3a78e7c7-1c8a-4b66-8438-6116f4f5ad35" testId="d4c2a601-a3e8-0133-cbd5-22cabfad911f" testName="ApplyingACoupon(&quot;Belt&quot;,&quot;nfocus&quot;,&quot;25&quot;,null)" computerName="DESKTOP-MOLHKHA" duration="00:00:20.1243990" startTime="2024-03-07T14:42:02.6663631+00:00" endTime="2024-03-07T14:42:22.7907612+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3a78e7c7-1c8a-4b66-8438-6116f4f5ad35">
+      <Output>
+        <StdOut>Browser set to firefox&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+Successfully dismiss pop-up alert&#xD;
+Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIAmOnTheLoginPage() (1.3s)&#xD;
+And I have logged in using valid credentials&#xD;
+Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIHaveLoggedInUsingValidCredentials() (1.3s)&#xD;
+When I navigate to the Shop page&#xD;
+Successfully navigated to shop page&#xD;
+-&gt; done: BackgroundStepDefinitions.WhenINavigateToTheShopPage() (0.5s)&#xD;
+When I add an 'Belt' to my cart&#xD;
+Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.WhenIAddAnToMyCart("Belt") (1.2s)&#xD;
+And and view cart to apply coupon 'nfocus'&#xD;
+Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.WhenApplyCoupon("nfocus") (1.0s)&#xD;
+Then I should get '25'% off my selected item&#xD;
+The discount applied is correct!&#xD;
+The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.ThenIShouldGetOffMySelectedItem("25") (1.6s)&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser</StdOut>
+      </Output>
+      <ResultFiles>
+        <ResultFile path="DESKTOP-MOLHKHA\Coupon_Applied_07-Mar-2024_14-42-16.png" />
+      </ResultFiles>
+    </UnitTestResult>
+    <UnitTestResult executionId="56f3f6c5-4370-4626-9b52-c6bed96786aa" testId="851e08fd-44e2-44dd-e00b-e2b4dc6da2bd" testName="PlacingAnOrder(&quot;Belt&quot;,&quot;Jane&quot;,&quot;Doe&quot;,&quot;United Kingdom (UK)&quot;,&quot;149 Piccadilly&quot;,&quot;London&quot;,&quot;W1J 7NT&quot;,&quot;01632 907767&quot;,null)" computerName="DESKTOP-MOLHKHA" duration="00:00:19.3250959" startTime="2024-03-07T14:42:22.7977582+00:00" endTime="2024-03-07T14:42:42.1228530+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="56f3f6c5-4370-4626-9b52-c6bed96786aa">
+      <Output>
+        <StdOut>Browser set to firefox&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+Successfully dismiss pop-up alert&#xD;
+Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIAmOnTheLoginPage() (1.4s)&#xD;
+And I have logged in using valid credentials&#xD;
+Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIHaveLoggedInUsingValidCredentials() (1.6s)&#xD;
+When I navigate to the Shop page&#xD;
+Successfully navigated to shop page&#xD;
+-&gt; done: BackgroundStepDefinitions.WhenINavigateToTheShopPage() (0.7s)&#xD;
+When I add an 'Belt' to my cart&#xD;
+Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.WhenIAddAnToMyCart("Belt") (1.2s)&#xD;
+And I fill out my 'Jane', 'Doe', 'United Kingdom (UK)', '149 Piccadilly', 'London', 'W1J 7NT' and '01632 907767' to place an order in checkout&#xD;
+Successfully navigated to the (?-i)Checkout(?-i) Page&#xD;
+Successfully filled out billing details&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.WhenIFillOutMyAndToPlaceAnOrderInCheckout("Jane", "Doe", "United Kingdom (UK)", "149 Piccadilly", "London", "W1J 7NT", "01632 907767") (1.0s)&#xD;
+Then I should see an order summary&#xD;
+Successfully Checked Payments Radio Button&#xD;
+Successfully placed and order; has taken us to order summary&#xD;
+Successfully retrieved the order number&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.ThenIShouldSeeAnOrderSummary() (1.9s)&#xD;
+And access it from my orders portal&#xD;
+Successfully back to account after placing an order&#xD;
+Checking orders page in my accounts&#xD;
+The order number from Checkout Page: 11017, The order number from MyAccount-&gt;Orders: #11017&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.ThenAccessItFromMyOrdersPortal() (1.3s)&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser</StdOut>
+      </Output>
+      <ResultFiles>
+        <ResultFile path="DESKTOP-MOLHKHA\Order_Summary_07-Mar-2024_14-42-38.png" />
+      </ResultFiles>
+    </UnitTestResult>
+    <UnitTestResult executionId="15dcbe23-7722-45f3-aaa1-ff25b476755c" testId="0038b3d8-e9d8-5ef4-ae69-454f79894d4c" testName="ApplyingACoupon(&quot;Cap&quot;,&quot;edgewords&quot;,&quot;10&quot;,null)" computerName="DESKTOP-MOLHKHA" duration="00:00:21.7920380" startTime="2024-03-07T14:41:19.6663964+00:00" endTime="2024-03-07T14:41:41.4582603+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="15dcbe23-7722-45f3-aaa1-ff25b476755c">
+      <Output>
+        <StdOut>Browser set to firefox&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+Successfully dismiss pop-up alert&#xD;
+Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIAmOnTheLoginPage() (1.4s)&#xD;
+And I have logged in using valid credentials&#xD;
+Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIHaveLoggedInUsingValidCredentials() (1.1s)&#xD;
+When I navigate to the Shop page&#xD;
+Successfully navigated to shop page&#xD;
+-&gt; done: BackgroundStepDefinitions.WhenINavigateToTheShopPage() (0.5s)&#xD;
+When I add an 'Cap' to my cart&#xD;
+Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.WhenIAddAnToMyCart("Cap") (1.2s)&#xD;
+And and view cart to apply coupon 'edgewords'&#xD;
+Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.WhenApplyCoupon("edgewords") (1.0s)&#xD;
+Then I should get '10'% off my selected item&#xD;
+The discount applied is correct!&#xD;
+The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.ThenIShouldGetOffMySelectedItem("10") (2.1s)&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser</StdOut>
+      </Output>
+      <ResultFiles>
+        <ResultFile path="DESKTOP-MOLHKHA\Coupon_Applied_07-Mar-2024_14-41-34.png" />
+      </ResultFiles>
+    </UnitTestResult>
+    <UnitTestResult executionId="e5c113b5-20e4-406b-bd40-e9c372db8882" testId="d8fce5d6-2140-6819-5f5c-1000f702a034" testName="ApplyingACoupon(&quot;Beanie&quot;,&quot;edgewords&quot;,&quot;15&quot;,null)" computerName="DESKTOP-MOLHKHA" duration="00:00:21.2024020" startTime="2024-03-07T14:41:41.4632803+00:00" endTime="2024-03-07T14:42:02.6656831+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e5c113b5-20e4-406b-bd40-e9c372db8882">
+      <Output>
+        <StdOut>Browser set to firefox&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+Successfully dismiss pop-up alert&#xD;
+Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIAmOnTheLoginPage() (1.4s)&#xD;
+And I have logged in using valid credentials&#xD;
+Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIHaveLoggedInUsingValidCredentials() (1.1s)&#xD;
+When I navigate to the Shop page&#xD;
+Successfully navigated to shop page&#xD;
+-&gt; done: BackgroundStepDefinitions.WhenINavigateToTheShopPage() (0.5s)&#xD;
+When I add an 'Beanie' to my cart&#xD;
+Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.WhenIAddAnToMyCart("Beanie") (1.6s)&#xD;
+And and view cart to apply coupon 'edgewords'&#xD;
+Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.WhenApplyCoupon("edgewords") (1.3s)&#xD;
+Then I should get '15'% off my selected item&#xD;
+The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.ThenIShouldGetOffMySelectedItem("15") (1.9s)&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser</StdOut>
+        <ErrorInfo>
+          <Message>  Assert.That(_cart.Discount, Is.EqualTo((ConvertToDecimal(discount)/100) * _cart.Price))&#xD;
+  Expected: 2.7m&#xD;
+  But was:  1.8m&#xD;
+</Message>
+          <StackTrace>   at uk.co.nfocus.EcommerceBDD.StepDefinitions.ApplyingACouponStepDefinitions.ThenIShouldGetOffMySelectedItem(String discount) in C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\StepDefinitions\ApplyingACouponStepDefinitions.cs:line 50&#xD;
+
+1)    at uk.co.nfocus.EcommerceBDD.StepDefinitions.ApplyingACouponStepDefinitions.ThenIShouldGetOffMySelectedItem(String discount) in C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\StepDefinitions\ApplyingACouponStepDefinitions.cs:line 50&#xD;
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+      <ResultFiles>
+        <ResultFile path="DESKTOP-MOLHKHA\Coupon_Applied_07-Mar-2024_14-41-56.png" />
+        <ResultFile path="DESKTOP-MOLHKHA\DiscountError_07-Mar-2024_14-41-56.png" />
+      </ResultFiles>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="ApplyingACoupon(&quot;Belt&quot;,&quot;nfocus&quot;,&quot;25&quot;,null)" storage="c:\users\genuinemathew\source\repos\uk.co.nfocus.ecommercebdd\uk.co.nfocus.ecommercebdd\bin\debug\net6.0\uk.co.nfocus.ecommercebdd.dll" id="d4c2a601-a3e8-0133-cbd5-22cabfad911f">
+      <Execution id="3a78e7c7-1c8a-4b66-8438-6116f4f5ad35" />
+      <TestMethod codeBase="C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\bin\Debug\net6.0\uk.co.nfocus.EcommerceBDD.dll" adapterTypeName="executor://nunit3testexecutor/" className="uk.co.nfocus.EcommerceBDD.Features.EcommerceTransactionFeature" name="ApplyingACoupon(&quot;Belt&quot;,&quot;nfocus&quot;,&quot;25&quot;,null)" />
+    </UnitTest>
+    <UnitTest name="PlacingAnOrder(&quot;Belt&quot;,&quot;Jane&quot;,&quot;Doe&quot;,&quot;United Kingdom (UK)&quot;,&quot;149 Piccadilly&quot;,&quot;London&quot;,&quot;W1J 7NT&quot;,&quot;01632 907767&quot;,null)" storage="c:\users\genuinemathew\source\repos\uk.co.nfocus.ecommercebdd\uk.co.nfocus.ecommercebdd\bin\debug\net6.0\uk.co.nfocus.ecommercebdd.dll" id="851e08fd-44e2-44dd-e00b-e2b4dc6da2bd">
+      <Execution id="56f3f6c5-4370-4626-9b52-c6bed96786aa" />
+      <TestMethod codeBase="C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\bin\Debug\net6.0\uk.co.nfocus.EcommerceBDD.dll" adapterTypeName="executor://nunit3testexecutor/" className="uk.co.nfocus.EcommerceBDD.Features.EcommerceTransactionFeature" name="PlacingAnOrder(&quot;Belt&quot;,&quot;Jane&quot;,&quot;Doe&quot;,&quot;United Kingdom (UK)&quot;,&quot;149 Piccadilly&quot;,&quot;London&quot;,&quot;W1J 7NT&quot;,&quot;01632 907767&quot;,null)" />
+    </UnitTest>
+    <UnitTest name="ApplyingACoupon(&quot;Beanie&quot;,&quot;edgewords&quot;,&quot;15&quot;,null)" storage="c:\users\genuinemathew\source\repos\uk.co.nfocus.ecommercebdd\uk.co.nfocus.ecommercebdd\bin\debug\net6.0\uk.co.nfocus.ecommercebdd.dll" id="d8fce5d6-2140-6819-5f5c-1000f702a034">
+      <Execution id="e5c113b5-20e4-406b-bd40-e9c372db8882" />
+      <TestMethod codeBase="C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\bin\Debug\net6.0\uk.co.nfocus.EcommerceBDD.dll" adapterTypeName="executor://nunit3testexecutor/" className="uk.co.nfocus.EcommerceBDD.Features.EcommerceTransactionFeature" name="ApplyingACoupon(&quot;Beanie&quot;,&quot;edgewords&quot;,&quot;15&quot;,null)" />
+    </UnitTest>
+    <UnitTest name="ApplyingACoupon(&quot;Cap&quot;,&quot;edgewords&quot;,&quot;10&quot;,null)" storage="c:\users\genuinemathew\source\repos\uk.co.nfocus.ecommercebdd\uk.co.nfocus.ecommercebdd\bin\debug\net6.0\uk.co.nfocus.ecommercebdd.dll" id="0038b3d8-e9d8-5ef4-ae69-454f79894d4c">
+      <Execution id="15dcbe23-7722-45f3-aaa1-ff25b476755c" />
+      <TestMethod codeBase="C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\bin\Debug\net6.0\uk.co.nfocus.EcommerceBDD.dll" adapterTypeName="executor://nunit3testexecutor/" className="uk.co.nfocus.EcommerceBDD.Features.EcommerceTransactionFeature" name="ApplyingACoupon(&quot;Cap&quot;,&quot;edgewords&quot;,&quot;10&quot;,null)" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="d4c2a601-a3e8-0133-cbd5-22cabfad911f" executionId="3a78e7c7-1c8a-4b66-8438-6116f4f5ad35" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="851e08fd-44e2-44dd-e00b-e2b4dc6da2bd" executionId="56f3f6c5-4370-4626-9b52-c6bed96786aa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0038b3d8-e9d8-5ef4-ae69-454f79894d4c" executionId="15dcbe23-7722-45f3-aaa1-ff25b476755c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d8fce5d6-2140-6819-5f5c-1000f702a034" executionId="e5c113b5-20e4-406b-bd40-e9c372db8882" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="4" executed="4" passed="3" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.5.0.0: Test execution started&#xD;
+Running all tests in C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\bin\Debug\net6.0\uk.co.nfocus.EcommerceBDD.dll&#xD;
+   NUnit3TestExecutor discovered 4 of 4 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+NUnit Adapter 4.5.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-MOLHKHA" outcome="Warning" timestamp="2024-03-07T14:41:41.4854194+00:00">
+        <Text>Browser set to firefox&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+Successfully dismiss pop-up alert&#xD;
+Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIAmOnTheLoginPage() (1.4s)&#xD;
+And I have logged in using valid credentials&#xD;
+Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIHaveLoggedInUsingValidCredentials() (1.1s)&#xD;
+When I navigate to the Shop page&#xD;
+Successfully navigated to shop page&#xD;
+-&gt; done: BackgroundStepDefinitions.WhenINavigateToTheShopPage() (0.5s)&#xD;
+When I add an 'Cap' to my cart&#xD;
+Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.WhenIAddAnToMyCart("Cap") (1.2s)&#xD;
+And and view cart to apply coupon 'edgewords'&#xD;
+Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.WhenApplyCoupon("edgewords") (1.0s)&#xD;
+Then I should get '10'% off my selected item&#xD;
+The discount applied is correct!&#xD;
+The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.ThenIShouldGetOffMySelectedItem("10") (2.1s)&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser&#xD;
+</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-MOLHKHA" outcome="Warning" timestamp="2024-03-07T14:42:02.6774072+00:00">
+        <Text>Browser set to firefox&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+Successfully dismiss pop-up alert&#xD;
+Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIAmOnTheLoginPage() (1.4s)&#xD;
+And I have logged in using valid credentials&#xD;
+Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIHaveLoggedInUsingValidCredentials() (1.1s)&#xD;
+When I navigate to the Shop page&#xD;
+Successfully navigated to shop page&#xD;
+-&gt; done: BackgroundStepDefinitions.WhenINavigateToTheShopPage() (0.5s)&#xD;
+When I add an 'Beanie' to my cart&#xD;
+Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.WhenIAddAnToMyCart("Beanie") (1.6s)&#xD;
+And and view cart to apply coupon 'edgewords'&#xD;
+Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.WhenApplyCoupon("edgewords") (1.3s)&#xD;
+Then I should get '15'% off my selected item&#xD;
+The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.ThenIShouldGetOffMySelectedItem("15") (1.9s)&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser&#xD;
+</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-MOLHKHA" outcome="Warning" timestamp="2024-03-07T14:42:22.7928347+00:00">
+        <Text>Browser set to firefox&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+Successfully dismiss pop-up alert&#xD;
+Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIAmOnTheLoginPage() (1.3s)&#xD;
+And I have logged in using valid credentials&#xD;
+Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIHaveLoggedInUsingValidCredentials() (1.3s)&#xD;
+When I navigate to the Shop page&#xD;
+Successfully navigated to shop page&#xD;
+-&gt; done: BackgroundStepDefinitions.WhenINavigateToTheShopPage() (0.5s)&#xD;
+When I add an 'Belt' to my cart&#xD;
+Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.WhenIAddAnToMyCart("Belt") (1.2s)&#xD;
+And and view cart to apply coupon 'nfocus'&#xD;
+Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.WhenApplyCoupon("nfocus") (1.0s)&#xD;
+Then I should get '25'% off my selected item&#xD;
+The discount applied is correct!&#xD;
+The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.ThenIShouldGetOffMySelectedItem("25") (1.6s)&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser&#xD;
+</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-MOLHKHA" outcome="Warning" timestamp="2024-03-07T14:42:42.1250801+00:00">
+        <Text>Browser set to firefox&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+Successfully dismiss pop-up alert&#xD;
+Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIAmOnTheLoginPage() (1.4s)&#xD;
+And I have logged in using valid credentials&#xD;
+Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.GivenIHaveLoggedInUsingValidCredentials() (1.6s)&#xD;
+When I navigate to the Shop page&#xD;
+Successfully navigated to shop page&#xD;
+-&gt; done: BackgroundStepDefinitions.WhenINavigateToTheShopPage() (0.7s)&#xD;
+When I add an 'Belt' to my cart&#xD;
+Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.WhenIAddAnToMyCart("Belt") (1.2s)&#xD;
+And I fill out my 'Jane', 'Doe', 'United Kingdom (UK)', '149 Piccadilly', 'London', 'W1J 7NT' and '01632 907767' to place an order in checkout&#xD;
+Successfully navigated to the (?-i)Checkout(?-i) Page&#xD;
+Successfully filled out billing details&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.WhenIFillOutMyAndToPlaceAnOrderInCheckout("Jane", "Doe", "United Kingdom (UK)", "149 Piccadilly", "London", "W1J 7NT", "01632 907767") (1.0s)&#xD;
+Then I should see an order summary&#xD;
+Successfully Checked Payments Radio Button&#xD;
+Successfully placed and order; has taken us to order summary&#xD;
+Successfully retrieved the order number&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.ThenIShouldSeeAnOrderSummary() (1.9s)&#xD;
+And access it from my orders portal&#xD;
+Successfully back to account after placing an order&#xD;
+Checking orders page in my accounts&#xD;
+The order number from Checkout Page: 11017, The order number from MyAccount-&gt;Orders: #11017&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.ThenAccessItFromMyOrdersPortal() (1.3s)&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser&#xD;
+</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

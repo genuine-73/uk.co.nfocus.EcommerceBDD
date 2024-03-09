@@ -92,5 +92,20 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
                 Console.WriteLine("Successfully saves a screenshot if something goes wrong");
             }
         }
+
+        [When(@"I fill out my '(.*)', '(.*)', '(.*)', '(.*)', '(.*)', '(.*)' and '(.*)' to place an order in checkout")]
+        public void WhenIFillOutMyAndToPlaceAnOrderInCheckout(string firstName, string lastName, string country, string address, string city, string postcode, string phoneNo)
+        {
+            //Navigating to checkout to place order
+            _navbar = new NavBar(_driver);
+            _navbar.GoToCheckout();
+            Console.WriteLine("Successfully navigated to the (?-i)Checkout(?-i) Page");
+
+            //Instantiating Checkour class and filling details
+            _checkout = new Checkout(_driver);
+            _checkout.SetFirstName(firstName).SetSecondName(lastName).SetCountry(country).SetAddress(address).SetCity(city).SetPostCode(postcode).SetPhoneNo(phoneNo);
+            //_checkout.WriteOutBillingDetails("Jane", "Doe", "149 Piccadilly", "London", "W1J 7NT", "01632 907767");
+            Console.WriteLine("Successfully filled out billing details");
+        }
     }
 }

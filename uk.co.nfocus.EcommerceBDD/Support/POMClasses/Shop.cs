@@ -21,6 +21,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         public Shop(IWebDriver driver)
         {
             this._driver = driver;
+            FillUpDict(); // Finds all the clothing item elements
             Assert.That(_driver.Url, Is.EqualTo("https://www.edgewordstraining.co.uk/demo-site/shop/"));
         }
 
@@ -29,26 +30,9 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _addItemToCart => _driver.FindElement(By.LinkText("Add to cart"));
 
         private IDictionary<string, IWebElement> newElements = new Dictionary<string, IWebElement>(); //Stores clothing items and webelements as key-value pair
-        private static IDictionary<string, IWebElement> newElements2 = new Dictionary<string, IWebElement>(); //Stores clothing items and webelements as key-value pair
 
         //Service Method
-        public void AddToCart()//Add item to cart
-        {
-            StaticWaitForElement(_driver, By.LinkText("Add to cart"));
-            _addItemToCart.Click();
-        }
-
-        public void ClickViewCart()//View Cart Takes us to the next page
-        {
-            StaticWaitForElement(_driver, By.LinkText("View cart"));
-            _viewCart.Click();
-        }
-
-        public void CheckForViewCart()//Checks the ime is added to the cart
-        {
-            StaticWaitForElement(_driver, By.LinkText("View cart"));
-        }
-
+        //Finds all the clothing items and stores them as key-value pairs where the clothing item 
         public void FillUpDict()
         {
             foreach (IWebElement elm in _driver.FindElements(By.TagName("h2")))
@@ -56,13 +40,13 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
                 newElements[elm.Text] = elm;
             }
         }
-
+        //Clicks the chosen product
         public void ClickProduct(string product)
         {
-            //FillUpDict();
             newElements[product].Click();   
         }
 
+        //checks if the item passed in is available in the shop page
         public bool Containsitem(string item)
         {
             if (newElements.ContainsKey(item))
@@ -71,19 +55,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
             return false;
 
-        }
-
-        public static void FillUpDict2(IWebDriver driver)
-        {
-            foreach (IWebElement elm in driver.FindElements(By.TagName("h2")))
-            {
-                newElements2[elm.Text] = elm;
-            }
-        }
-
-        public static void ClickProduct2(string product)
-        {
-            newElements2[product].Click();
         }
     }
 }
