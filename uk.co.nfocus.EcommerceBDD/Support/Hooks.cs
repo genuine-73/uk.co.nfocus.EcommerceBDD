@@ -76,6 +76,13 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             _driver.Url = "https://www.edgewordstraining.co.uk/demo-site/";
             Console.WriteLine("Successfully loads E-Commerce Page");
 
+            //Instantiating Dismiss button
+            PopUps dismiss = new PopUps(_driver);
+
+            //Dismissing button
+            dismiss.ClickDismissButton();
+            Console.WriteLine("Successfully dismiss pop-up alert");
+
         }
 
 

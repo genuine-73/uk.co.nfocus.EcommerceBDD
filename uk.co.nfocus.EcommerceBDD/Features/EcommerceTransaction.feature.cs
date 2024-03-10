@@ -35,7 +35,8 @@ namespace uk.co.nfocus.EcommerceBDD.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "EcommerceTransaction", null, ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "EcommerceTransaction", "In order to enhance customer experience when purchasing an Item online\r\nthe CEO o" +
+                    "f the clothing website\r\nwants to provide an order functionality ", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,26 +76,26 @@ namespace uk.co.nfocus.EcommerceBDD.Features
         
         public virtual void FeatureBackground()
         {
-#line 4
-#line hidden
-#line 5
- testRunner.Given("I am on the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 6
- testRunner.And("I have logged in using valid credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 7
+ testRunner.Given("I have logged in using valid credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 8
  testRunner.When("I navigate to the Shop page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 9
+ testRunner.And("I add an \'Belt\' to my cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Applying a coupon")]
         [NUnit.Framework.CategoryAttribute("TestCaseOne")]
-        [NUnit.Framework.TestCaseAttribute("Cap", "edgewords", "10", null)]
-        [NUnit.Framework.TestCaseAttribute("Beanie", "edgewords", "15", null)]
-        [NUnit.Framework.TestCaseAttribute("Belt", "nfocus", "25", null)]
-        public void ApplyingACoupon(string item, string coupon, string discount, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("edgewords", "10", null)]
+        [NUnit.Framework.TestCaseAttribute("edgewords", "15", null)]
+        [NUnit.Framework.TestCaseAttribute("nfocus", "25", null)]
+        public void ApplyingACoupon(string coupon, string discount, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "TestCaseOne"};
@@ -104,11 +105,10 @@ namespace uk.co.nfocus.EcommerceBDD.Features
             }
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("item", item);
             argumentsOfScenario.Add("coupon", coupon);
             argumentsOfScenario.Add("discount", discount);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Applying a coupon", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 17
+#line 13
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -118,16 +118,13 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 4
+#line 6
 this.FeatureBackground();
 #line hidden
-#line 18
- testRunner.When(string.Format("I add an \'{0}\' to my cart", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 14
+ testRunner.When(string.Format("and view cart to apply coupon \'{0}\'", coupon), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 19
- testRunner.And(string.Format("and view cart to apply coupon \'{0}\'", coupon), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 20
+#line 15
  testRunner.Then(string.Format("I should get \'{0}\'% off my selected item", discount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -137,8 +134,8 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Placing an order")]
         [NUnit.Framework.CategoryAttribute("TestCaseTwo")]
-        [NUnit.Framework.TestCaseAttribute("Belt", "Jane", "Doe", "United Kingdom (UK)", "149 Piccadilly", "London", "W1J 7NT", "01632 907767", null)]
-        public void PlacingAnOrder(string item, string firstName, string lastName, string country, string address, string city, string postcode, string phoneNo, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Jane", "Doe", "United Kingdom (UK)", "149 Piccadilly", "London", "W1J 7NT", "01632 907767", null)]
+        public void PlacingAnOrder(string firstName, string lastName, string country, string address, string city, string postcode, string phoneNo, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "TestCaseTwo"};
@@ -148,7 +145,6 @@ this.FeatureBackground();
             }
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("item", item);
             argumentsOfScenario.Add("firstName", firstName);
             argumentsOfScenario.Add("lastName", lastName);
             argumentsOfScenario.Add("country", country);
@@ -157,7 +153,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("postcode", postcode);
             argumentsOfScenario.Add("phoneNo", phoneNo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Placing an order", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 36
+#line 25
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -167,20 +163,17 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 4
+#line 6
 this.FeatureBackground();
 #line hidden
-#line 37
- testRunner.When(string.Format("I add an \'{0}\' to my cart", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
+ testRunner.When(string.Format("I fill out my \'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\' and \'{6}\' to place an orde" +
+                            "r in checkout", firstName, lastName, country, address, city, postcode, phoneNo), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 38
- testRunner.And(string.Format("I fill out my \'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\' and \'{6}\' to place an orde" +
-                            "r in checkout", firstName, lastName, country, address, city, postcode, phoneNo), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 39
+#line 27
  testRunner.Then("I should see an order summary", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 40
+#line 28
  testRunner.And("access it from my orders portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

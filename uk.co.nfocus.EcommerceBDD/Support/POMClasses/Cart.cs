@@ -35,7 +35,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _removeCoupon => _driver.FindElement(By.LinkText("[Remove]")); //Finds the [Remove] link to clear coupon 
         private IWebElement _price => _driver.FindElement(By.CssSelector("td.product-subtotal > span:nth-child(1) > bdi:nth-child(1)")); // Cost of the clothing item
         private IWebElement _discount => _driver.FindElement(By.CssSelector(".cart-discount > td:nth-child(2) > span:nth-child(1)")); // Cost of Discount
-        private IWebElement _shippingCost => _driver.FindElement(By.CssSelector("#shipping_method > li:nth-child(1) > label:nth-child(2) > span:nth-child(1)")); // Shipping cost
+        private IWebElement _shippingCost => _driver.FindElement(By.CssSelector("#shipping_method > li > label > span")); // Shipping cost
         private IWebElement _total => _driver.FindElement(By.CssSelector(".order-total > td:nth-child(2)")); // The total cost of price + shipping
         private IWebElement _returnToShop => _driver.FindElement(By.LinkText("Return to shop"));
         
@@ -138,8 +138,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
 
                 try
                 {
-                    //Thread.Sleep(2000);
-                    //_removeItem.Click();
                     ClickElementInView(_driver, _removeItem);
                 }
                 catch

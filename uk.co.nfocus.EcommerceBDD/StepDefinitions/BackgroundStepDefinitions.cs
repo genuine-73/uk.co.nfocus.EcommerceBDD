@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using uk.co.nfocus.EcommerceBDD.StepDefinitions;
 using uk.co.nfocus.EcommerceBDD.Support;
 using uk.co.nfocus.EcommerceBDD.Support.POMClasses;
+using static uk.co.nfocus.EcommerceBDD.Support.StaticHelperLib;
 
 namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 {
@@ -26,28 +27,18 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _scenarioContext = scenarioContext;
             this._driver = wrapper.Driver;
         }
-        [Given(@"(?:I|i) am on the login page")]
-        public void GivenIAmOnTheLoginPage()
+
+        [Given(@"(?:I|i) have logged in using valid credentials")]
+        public void GivenIHaveLoggedInUsingValidCredentials()
         {
             //Instantiating navigation bar
             _navbar = new NavBar(_driver);
             _scenarioContext["navbar"] = _navbar;
 
-            //Instantiating Dismiss button
-            PopUps dismiss = new PopUps(_driver);
-
-            //Dismissing button
-            dismiss.ClickDismissButton();
-            Console.WriteLine("Successfully dismiss pop-up alert");
-
             // Go to my Account
             _navbar.GoToAccount();
             Console.WriteLine("Successfully navigated to MyAccount Page");
-        }
 
-        [Given(@"(?:I|i) have logged in using valid credentials")]
-        public void GivenIHaveLoggedInUsingValidCredentials()
-        {
             _myAccount = new MyAccount(_driver);
             //retrieves the username environment variable set in .runsettings
             string username = Environment.GetEnvironmentVariable("SECRET_USERNAME");
@@ -68,6 +59,30 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Go To Shop
             _navbar.GoToShop();
             Console.WriteLine("Successfully navigated to shop page");
+        }
+
+        [When(@"(?:I|i) add an '(.*)' to my (?i)cart(?-i)")]
+        public void WhenIAddAnToMyCart(string item)
+        {
+            //Intialises shop object
+            Shop product = new Shop(_driver);
+            try
+            {
+                //Checks to see if the 'item' passed is in the shop page
+                Assert.That(true, Is.EqualTo(product.Containsitem(item)));
+                //If it exists, click the clothing item
+                product.ClickProduct(item);
+
+                //Creates a clothing item object and adds that object to cart
+                ClothingItems clothingItems = new ClothingItems(_driver, item);
+                clothingItems.AddItemToCart();
+                Console.WriteLine("Successfully added an item to cart");
+            }
+            catch
+            {
+                //If an exception is raised in this case where the item does not exist, takes a screenshot
+                TakeFullPageScreenshot(_driver, "ItemDoesNotExist");
+            }
         }
 
     }

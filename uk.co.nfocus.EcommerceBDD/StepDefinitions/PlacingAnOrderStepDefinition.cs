@@ -20,13 +20,14 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         private Checkout _checkout;
         private OrderReceived _orderPage;
         private MyAccount _myAccount;
+        private AccountOrder latestOrderPage;
         public PlacingAnOrderStepDefinition(ScenarioContext scenarioContext, WDWrapper wrapper)
         {
             _scenarioContext = scenarioContext;
             this._driver = wrapper.Driver;
         }
-        [When(@"fill out the billing details to place an order in checkout")]
-        public void WhenFillOutTheBillingDetailsToPlaceAnOrderInCheckout()
+        [When(@"I fill out my '(.*)', '(.*)', '(.*)', '(.*)', '(.*)', '(.*)' and '(.*)' to place an order in checkout")]
+        public void WhenIFillOutMyAndToPlaceAnOrderInCheckout(string firstName, string lastName, string country, string address, string city, string postcode, string phoneNo)
         {
             //Navigating to checkout to place order
             _navbar = new NavBar(_driver);
@@ -35,10 +36,9 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 
             //Instantiating Checkour class and filling details
             _checkout = new Checkout(_driver);
-            _checkout.SetFirstName("Jane").SetSecondName("Doe").SetCountry("United Kingdom (UK)").SetAddress("149 Piccadilly").SetCity("London").SetPostCode("W1J 7NT").SetPhoneNo("01632 907767");
+            _checkout.SetFirstName(firstName).SetSecondName(lastName).SetCountry(country).SetAddress(address).SetCity(city).SetPostCode(postcode).SetPhoneNo(phoneNo);
             //_checkout.WriteOutBillingDetails("Jane", "Doe", "149 Piccadilly", "London", "W1J 7NT", "01632 907767");
             Console.WriteLine("Successfully filled out billing details");
-
         }
 
         [Then(@"(?:I|i) should see an order summary")]
@@ -75,8 +75,9 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             Console.WriteLine("Checking orders page in my accounts");
 
             //Grabs the latest order number from MyAccount -> Orders Page
-            LatestOrderPOM latestOrderPOM = new LatestOrderPOM(_driver);
-            string viewOrder = latestOrderPOM.ViewLatestOrder();
+            //LatestOrderPOM latestOrderPOM = new LatestOrderPOM(_driver);
+            latestOrderPage = new AccountOrder(_driver);
+            string viewOrder = latestOrderPage.ViewLatestOrder();
 
             //Checks if the order Number matches
             string orderNo = (string)_scenarioContext["_orderNo"];
@@ -91,21 +92,6 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
                 TakeFullPageScreenshot(_driver, "Incorrect", "TestCaseTwo");
                 Console.WriteLine("Successfully saves a screenshot if something goes wrong");
             }
-        }
-
-        [When(@"I fill out my '(.*)', '(.*)', '(.*)', '(.*)', '(.*)', '(.*)' and '(.*)' to place an order in checkout")]
-        public void WhenIFillOutMyAndToPlaceAnOrderInCheckout(string firstName, string lastName, string country, string address, string city, string postcode, string phoneNo)
-        {
-            //Navigating to checkout to place order
-            _navbar = new NavBar(_driver);
-            _navbar.GoToCheckout();
-            Console.WriteLine("Successfully navigated to the (?-i)Checkout(?-i) Page");
-
-            //Instantiating Checkour class and filling details
-            _checkout = new Checkout(_driver);
-            _checkout.SetFirstName(firstName).SetSecondName(lastName).SetCountry(country).SetAddress(address).SetCity(city).SetPostCode(postcode).SetPhoneNo(phoneNo);
-            //_checkout.WriteOutBillingDetails("Jane", "Doe", "149 Piccadilly", "London", "W1J 7NT", "01632 907767");
-            Console.WriteLine("Successfully filled out billing details");
         }
     }
 }
