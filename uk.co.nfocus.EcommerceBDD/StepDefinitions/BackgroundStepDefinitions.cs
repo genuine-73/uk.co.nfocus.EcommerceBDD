@@ -35,6 +35,13 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _navbar = new NavBar(_driver);
             _scenarioContext["navbar"] = _navbar;
 
+            //Instantiating Dismiss button
+            PopUps dismiss = new PopUps(_driver);
+
+            //Dismissing button
+            dismiss.ClickDismissButton();
+            Console.WriteLine("Successfully dismiss pop-up alert");
+
             // Go to my Account
             _navbar.GoToAccount();
             Console.WriteLine("Successfully navigated to MyAccount Page");
@@ -61,7 +68,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             Console.WriteLine("Successfully navigated to shop page");
         }
 
-        [When(@"(?:I|i) add an '(.*)' to my (?i)cart(?-i)")]
+        [When(@"add '(.*)' to my (?i)cart(?-i)")]
         public void WhenIAddAnToMyCart(string item)
         {
             //Intialises shop object

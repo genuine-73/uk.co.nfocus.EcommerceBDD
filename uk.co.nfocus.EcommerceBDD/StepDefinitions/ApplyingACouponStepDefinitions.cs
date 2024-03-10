@@ -27,7 +27,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         }
 
 
-        [When(@"and view cart to apply coupon '(.*)'")]
+        [When(@"(?:I|i) view cart to apply coupon '(.*)'")]
         public void WhenApplyCoupon(string coupon)
         {
             //Navigates to cart
@@ -41,7 +41,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 
         }
 
-        [Then(@"I should get '(.*)'% off my selected item")]
+        [Then(@"(?:I|i) should get '(.*)'% off my selected item")]
         public void ThenIShouldGetOffMySelectedItem(string discount)
         {
 
@@ -55,6 +55,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             {
                 // Take Screenshot if an exception's occurs when discount is wrong
                 TakeFullPageScreenshot(_driver, "DiscountError", "TestCaseOne");
+                Console.WriteLine("Discount has not been applied correctly");
             }
 
             //Tests if the total calculated is correct
@@ -67,6 +68,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             {
                 //Take Screenshot if an exception occurs in calculating the total.
                 TakeFullPageScreenshot(_driver, "TotalCostError", "TestCaseOne");
+                Console.WriteLine("The total is incorrect");
             }
 
             // Take Screenshot of Cart Page

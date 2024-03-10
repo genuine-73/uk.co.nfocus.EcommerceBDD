@@ -85,7 +85,7 @@ namespace uk.co.nfocus.EcommerceBDD.Features
  testRunner.When("I navigate to the Shop page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
- testRunner.And("I add an \'Belt\' to my cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("add \'Belt\' to my cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
         
@@ -122,7 +122,7 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 14
- testRunner.When(string.Format("and view cart to apply coupon \'{0}\'", coupon), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I view cart to apply coupon \'{0}\'", coupon), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 15
  testRunner.Then(string.Format("I should get \'{0}\'% off my selected item", discount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -134,24 +134,11 @@ this.FeatureBackground();
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Placing an order")]
         [NUnit.Framework.CategoryAttribute("TestCaseTwo")]
-        [NUnit.Framework.TestCaseAttribute("Jane", "Doe", "United Kingdom (UK)", "149 Piccadilly", "London", "W1J 7NT", "01632 907767", null)]
-        public void PlacingAnOrder(string firstName, string lastName, string country, string address, string city, string postcode, string phoneNo, string[] exampleTags)
+        public void PlacingAnOrder()
         {
-            string[] @__tags = new string[] {
+            string[] tagsOfScenario = new string[] {
                     "TestCaseTwo"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("firstName", firstName);
-            argumentsOfScenario.Add("lastName", lastName);
-            argumentsOfScenario.Add("country", country);
-            argumentsOfScenario.Add("address", address);
-            argumentsOfScenario.Add("city", city);
-            argumentsOfScenario.Add("postcode", postcode);
-            argumentsOfScenario.Add("phoneNo", phoneNo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Placing an order", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 25
 this.ScenarioInitialize(scenarioInfo);
@@ -167,8 +154,8 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 26
- testRunner.When(string.Format("I fill out my \'{0}\', \'{1}\', \'{2}\', \'{3}\', \'{4}\', \'{5}\' and \'{6}\' to place an orde" +
-                            "r in checkout", firstName, lastName, country, address, city, postcode, phoneNo), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I fill out \'Jane\', \'Doe\', \'United Kingdom (UK)\', \'149 Piccadilly\', \'London\', \'W1J" +
+                        " 7NT\' and \'01632 907767\' to place an order in checkout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 27
  testRunner.Then("I should see an order summary", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

@@ -26,7 +26,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _scenarioContext = scenarioContext;
             this._driver = wrapper.Driver;
         }
-        [When(@"I fill out my '(.*)', '(.*)', '(.*)', '(.*)', '(.*)', '(.*)' and '(.*)' to place an order in checkout")]
+        [When(@"I fill out '(.*)', '(.*)', '(.*)', '(.*)', '(.*)', '(.*)' and '(.*)' to place an order in checkout")]
         public void WhenIFillOutMyAndToPlaceAnOrderInCheckout(string firstName, string lastName, string country, string address, string city, string postcode, string phoneNo)
         {
             //Navigating to checkout to place order

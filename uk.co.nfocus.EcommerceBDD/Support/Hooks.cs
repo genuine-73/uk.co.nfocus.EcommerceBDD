@@ -38,8 +38,8 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             _wrapper = wrapper;
         }
 
-        [Before] //Runs beore every scenario
-        public void SetUpUsingTypeSafeWrapper()
+        [Before] //Runs before every scenario
+        public void SetUp()
         {
 
             //Retrieves the enviornment variable browser set on .runsettings file
@@ -75,13 +75,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             //Navigates to the homepage of E-commerce website
             _driver.Url = "https://www.edgewordstraining.co.uk/demo-site/";
             Console.WriteLine("Successfully loads E-Commerce Page");
-
-            //Instantiating Dismiss button
-            PopUps dismiss = new PopUps(_driver);
-
-            //Dismissing button
-            dismiss.ClickDismissButton();
-            Console.WriteLine("Successfully dismiss pop-up alert");
 
         }
 

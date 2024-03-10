@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+    <!--configuration elements-->
+    <RunConfiguration>
+        <EnvironmentVariables>
+            <!-- List of environment variables we want to set-->
+            <BROWSER>firefox</BROWSER>
+            <SECRET_USERNAME>helloGen@edgewords.co.uk</SECRET_USERNAME>
+            <SECRET_PASSWORD>HelloEdgewords!23</SECRET_PASSWORD>
+        </EnvironmentVariables>
+    </RunConfiguration>
+    <TestRunParameters>
+        <Parameter name="WebAppURL" value="https://www.edgewordstraining.co.uk/demo-site/"/>
+    </TestRunParameters>
+</RunSettings>
