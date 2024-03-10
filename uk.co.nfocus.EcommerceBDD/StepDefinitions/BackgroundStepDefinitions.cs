@@ -28,7 +28,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             this._driver = wrapper.Driver;
         }
 
-        [Given(@"(?:I|i) have logged in using valid credentials")]
+        [Given(@"(?:I|i) have logged in using valid login credentials")]
         public void GivenIHaveLoggedInUsingValidCredentials()
         {
             //Instantiating navigation bar

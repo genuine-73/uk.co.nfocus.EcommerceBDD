@@ -79,7 +79,7 @@ namespace uk.co.nfocus.EcommerceBDD.Features
 #line 6
 #line hidden
 #line 7
- testRunner.Given("I have logged in using valid credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have logged in using valid login credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 8
  testRunner.When("I navigate to the Shop page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

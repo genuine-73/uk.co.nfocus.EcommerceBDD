@@ -188,8 +188,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
             catch (Exception)
             {
-                //_checkPayments.Click();
-                //_placeOrder.Click();
                 ClickElementInView(_driver, _placeOrder);
             }
 
@@ -205,8 +203,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
             catch
             {
-                //Thread.Sleep(2000);
-                //_checkPayments.Click();
                 ScrollElementIntoView(_driver, _checkPayments);
                 ClickElementInView(_driver, _checkPayments);
             }

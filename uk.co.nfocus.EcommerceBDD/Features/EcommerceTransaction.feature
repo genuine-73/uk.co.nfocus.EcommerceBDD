@@ -4,7 +4,7 @@ the CEO of the clothing website
 wants to provide an order functionality 
 
 Background: 
-	Given I have logged in using valid credentials
+	Given I have logged in using valid login credentials
 	When I navigate to the Shop page
 	And add 'Belt' to my cart
 

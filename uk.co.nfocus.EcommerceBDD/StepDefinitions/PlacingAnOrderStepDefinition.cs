@@ -32,7 +32,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Navigating to checkout to place order
             _navbar = new NavBar(_driver);
             _navbar.GoToCheckout();
-            Console.WriteLine("Successfully navigated to the (?-i)Checkout(?-i) Page");
+            Console.WriteLine("Successfully navigated to the checkout Page");
 
             //Instantiating Checkour class and filling details
             _checkout = new Checkout(_driver);
