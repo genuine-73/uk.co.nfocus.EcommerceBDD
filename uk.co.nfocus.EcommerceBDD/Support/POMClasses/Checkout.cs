@@ -205,6 +205,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             {
                 ScrollElementIntoView(_driver, _checkPayments);
                 ClickElementInView(_driver, _checkPayments);
+               
             }
         }
 

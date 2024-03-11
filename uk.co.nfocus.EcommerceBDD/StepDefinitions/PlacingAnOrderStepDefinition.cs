@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,11 +37,38 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 
             //Instantiating Checkour class and filling details
             _checkout = new Checkout(_driver);
-            _checkout.SetFirstName(firstName).SetSecondName(lastName).SetCountry(country).SetAddress(address).SetCity(city).SetPostCode(postcode).SetPhoneNo(phoneNo);
+            _checkout.SetFirstName(firstName)
+                     .SetSecondName(lastName)
+                     .SetCountry(country)
+                     .SetAddress(address)
+                     .SetCity(city)
+                     .SetPostCode(postcode)
+                     .SetPhoneNo(phoneNo);
+
             //_checkout.WriteOutBillingDetails("Jane", "Doe", "149 Piccadilly", "London", "W1J 7NT", "01632 907767");
             Console.WriteLine("Successfully filled out billing details");
         }
 
+        [When(@"I fill the billing details to place an order in checkout")]
+        public void WhenIFillTheBillingDetailsToPlaceAnOrderInCheckout(Table table)
+        {
+            //Navigating to checkout to place order
+            _navbar = new NavBar(_driver);
+            _navbar.GoToCheckout();
+            Console.WriteLine("Successfully navigated to the checkout Page");
+
+            //Instantiating Checkour class and filling details
+            _checkout = new Checkout(_driver);
+            _checkout.SetFirstName(table.Rows[0]["firstName"])
+                     .SetSecondName(table.Rows[0]["secondName"])
+                     .SetCountry(table.Rows[0]["country"])
+                     .SetAddress(table.Rows[0]["address"])
+                     .SetCity(table.Rows[0]["city"])
+                     .SetPostCode(table.Rows[0]["postcode"])
+                     .SetPhoneNo(table.Rows[0]["phoneNo"]);
+            //_checkout.WriteOutBillingDetails("Jane", "Doe", "149 Piccadilly", "London", "W1J 7NT", "01632 907767");
+            Console.WriteLine("Successfully filled out billing details");
+        }
         [Then(@"(?:I|i) should see an order summary")]
         public void ThenIShouldSeeAnOrderSummary()
         {
@@ -59,7 +87,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Takes a screenshot of the order summary
             TakeFullPageScreenshot(_driver, "Order_Summary", "TestCaseTwo");
             Console.WriteLine("Successfully retrieved the order number");
-            _scenarioContext["_orderNo"] = orderNo; //Allows to share objects between sets and 
+            _scenarioContext["_orderNo"] = orderNo; //Allows to share objects between sets  
         }
 
         [Then(@"access it from my orders portal")]
@@ -75,7 +103,6 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             Console.WriteLine("Checking orders page in my accounts");
 
             //Grabs the latest order number from MyAccount -> Orders Page
-            //LatestOrderPOM latestOrderPOM = new LatestOrderPOM(_driver);
             latestOrderPage = new AccountOrder(_driver);
             string viewOrder = latestOrderPage.ViewLatestOrder();
 

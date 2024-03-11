@@ -50,6 +50,8 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             {
                 Assert.That(_cart.Discount, Is.EqualTo((ConvertToDecimal(discount)/100) * _cart.Price));
                 Console.WriteLine("The discount applied is correct!");
+                // Take Screenshot of Cart Page
+                TakeFullPageScreenshot(_driver, "Coupon_Applied_Correctly", "TestCaseOne");
             }
             catch (Exception e)
             {
@@ -63,6 +65,8 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             {
                 Assert.That(_cart.Total, Is.EqualTo(_cart.Price - _cart.Discount + _cart.ShippingCost));
                 Console.WriteLine("The total is correct!");
+                // Take Screenshot of Cart Page
+                TakeFullPageScreenshot(_driver, "Total_Applied_Correctly", "TestCaseOne");
             }
             catch (Exception)
             {
@@ -70,9 +74,6 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
                 TakeFullPageScreenshot(_driver, "TotalCostError", "TestCaseOne");
                 Console.WriteLine("The total is incorrect");
             }
-
-            // Take Screenshot of Cart Page
-            TakeFullPageScreenshot(_driver, "Coupon_Applied", "TestCaseOne");
 
         }
     }

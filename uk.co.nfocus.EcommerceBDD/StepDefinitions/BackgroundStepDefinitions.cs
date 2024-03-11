@@ -28,8 +28,8 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             this._driver = wrapper.Driver;
         }
 
-        [Given(@"(?:I|i) have logged in using valid login credentials")]
-        public void GivenIHaveLoggedInUsingValidCredentials()
+        [Given(@"I am on the login page")]
+        public void GivenIAmOnTheLoginPage()
         {
             //Instantiating navigation bar
             _navbar = new NavBar(_driver);
@@ -45,6 +45,11 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             // Go to my Account
             _navbar.GoToAccount();
             Console.WriteLine("Successfully navigated to MyAccount Page");
+        }
+
+        [When(@"(?:I|i) have logged in using valid login credentials")]
+        public void GivenIHaveLoggedInUsingValidCredentials()
+        {
 
             _myAccount = new MyAccount(_driver);
             //retrieves the username environment variable set in .runsettings
@@ -66,30 +71,6 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Go To Shop
             _navbar.GoToShop();
             Console.WriteLine("Successfully navigated to shop page");
-        }
-
-        [When(@"add '(.*)' to my (?i)cart(?-i)")]
-        public void WhenIAddAnToMyCart(string item)
-        {
-            //Intialises shop object
-            Shop product = new Shop(_driver);
-            try
-            {
-                //Checks to see if the 'item' passed is in the shop page
-                Assert.That(true, Is.EqualTo(product.Containsitem(item)));
-                //If it exists, click the clothing item
-                product.ClickProduct(item);
-
-                //Creates a clothing item object and adds that object to cart
-                ClothingItems clothingItems = new ClothingItems(_driver, item);
-                clothingItems.AddItemToCart();
-                Console.WriteLine("Successfully added an item to cart");
-            }
-            catch
-            {
-                //If an exception is raised in this case where the item does not exist, takes a screenshot
-                TakeFullPageScreenshot(_driver, "ItemDoesNotExist");
-            }
         }
 
     }
