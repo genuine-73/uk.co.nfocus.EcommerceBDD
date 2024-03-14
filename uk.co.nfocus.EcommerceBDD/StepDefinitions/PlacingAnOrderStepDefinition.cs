@@ -6,7 +6,9 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechTalk.SpecFlow.Assist;
 using uk.co.nfocus.EcommerceBDD.Support;
+using uk.co.nfocus.EcommerceBDD.Support.POCOs;
 using uk.co.nfocus.EcommerceBDD.Support.POMClasses;
 using static uk.co.nfocus.EcommerceBDD.Support.StaticHelperLib;
 
@@ -16,37 +18,18 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
     internal class PlacingAnOrderStepDefinition
     {
         private readonly ScenarioContext _scenarioContext;
+
+        private BillingDetailsPOCO _billingDetailsPOCO;
         private IWebDriver _driver;
         private NavBar _navbar;
         private Checkout _checkout;
         private OrderReceived _orderPage;
         private MyAccount _myAccount;
         private AccountOrder latestOrderPage;
-        public PlacingAnOrderStepDefinition(ScenarioContext scenarioContext, WDWrapper wrapper)
+        public PlacingAnOrderStepDefinition(ScenarioContext scenarioContext, WDWrapper wrapper, BillingDetailsPOCO billingDetailsShared)
         {
             _scenarioContext = scenarioContext;
             this._driver = wrapper.Driver;
-        }
-        [When(@"I fill out '(.*)', '(.*)', '(.*)', '(.*)', '(.*)', '(.*)' and '(.*)' to place an order in checkout")]
-        public void WhenIFillOutMyAndToPlaceAnOrderInCheckout(string firstName, string lastName, string country, string address, string city, string postcode, string phoneNo)
-        {
-            //Navigating to checkout to place order
-            _navbar = new NavBar(_driver);
-            _navbar.GoToCheckout();
-            Console.WriteLine("Successfully navigated to the checkout Page");
-
-            //Instantiating Checkour class and filling details
-            _checkout = new Checkout(_driver);
-            _checkout.SetFirstName(firstName)
-                     .SetSecondName(lastName)
-                     .SetCountry(country)
-                     .SetAddress(address)
-                     .SetCity(city)
-                     .SetPostCode(postcode)
-                     .SetPhoneNo(phoneNo);
-
-            //_checkout.WriteOutBillingDetails("Jane", "Doe", "149 Piccadilly", "London", "W1J 7NT", "01632 907767");
-            Console.WriteLine("Successfully filled out billing details");
         }
 
         [When(@"I fill the billing details to place an order in checkout")]
@@ -57,16 +40,18 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _navbar.GoToCheckout();
             Console.WriteLine("Successfully navigated to the checkout Page");
 
+            _billingDetailsPOCO = table.CreateInstance<BillingDetailsPOCO>();
+
             //Instantiating Checkour class and filling details
             _checkout = new Checkout(_driver);
-            _checkout.SetFirstName(table.Rows[0]["firstName"])
-                     .SetSecondName(table.Rows[0]["secondName"])
-                     .SetCountry(table.Rows[0]["country"])
-                     .SetAddress(table.Rows[0]["address"])
-                     .SetCity(table.Rows[0]["city"])
-                     .SetPostCode(table.Rows[0]["postcode"])
-                     .SetPhoneNo(table.Rows[0]["phoneNo"]);
-            //_checkout.WriteOutBillingDetails("Jane", "Doe", "149 Piccadilly", "London", "W1J 7NT", "01632 907767");
+            _checkout.SetFirstName(_billingDetailsPOCO.FirstName)
+                         .SetSecondName(_billingDetailsPOCO.SecondName)
+                         .SetCountry(_billingDetailsPOCO.Country)
+                         .SetAddress(_billingDetailsPOCO.Address)
+                         .SetCity(_billingDetailsPOCO.City)
+                         .SetPostCode(_billingDetailsPOCO.Postcode)
+                         .SetPhoneNo(_billingDetailsPOCO.PhoneNo);
+
             Console.WriteLine("Successfully filled out billing details");
         }
         [Then(@"(?:I|i) should see an order summary")]
@@ -83,6 +68,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Goes to Order Summary Page and grabs the order number
             _orderPage = new OrderReceived(_driver);
             string orderNo = _orderPage.OrderNo;
+            Console.WriteLine("Successfully made a copy of the order number");
 
             //Takes a screenshot of the order summary
             TakeFullPageScreenshot(_driver, "Order_Summary", "TestCaseTwo");
@@ -105,6 +91,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Grabs the latest order number from MyAccount -> Orders Page
             latestOrderPage = new AccountOrder(_driver);
             string viewOrder = latestOrderPage.ViewLatestOrder();
+            Console.WriteLine("Successfully grabs the order number from the latest order in Orders Page > My Account");
 
             //Checks if the order Number matches
             string orderNo = (string)_scenarioContext["_orderNo"];

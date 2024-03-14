@@ -62,6 +62,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             Assert.That(loggedIn, Is.True, "We did not login");
             Console.WriteLine("Successfully logged in");
             
+            //Used to logout during logout process
             _scenarioContext["_myAccount"] = _myAccount;
         }
 

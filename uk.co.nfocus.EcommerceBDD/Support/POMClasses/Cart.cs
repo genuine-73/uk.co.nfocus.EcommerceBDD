@@ -33,12 +33,12 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _couponCode => _driver.FindElement(By.Id("coupon_code")); // Finds the field to enter coupon code
         private IWebElement _applyButton => _driver.FindElement(By.Name("apply_coupon")); //Finds the apply coupon button 
         private IWebElement _removeCoupon => _driver.FindElement(By.LinkText("[Remove]")); //Finds the [Remove] link to clear coupon 
-        private IWebElement _price => _driver.FindElement(By.CssSelector("td.product-subtotal > span:nth-child(1) > bdi:nth-child(1)")); // Cost of the clothing item
+        private IWebElement _subtotal => _driver.FindElement(By.CssSelector("td.product-subtotal > span:nth-child(1) > bdi:nth-child(1)")); // Cost of the clothing item
         private IWebElement _discount => _driver.FindElement(By.CssSelector(".cart-discount > td:nth-child(2) > span:nth-child(1)")); // Cost of Discount
         private IWebElement _shippingCost => _driver.FindElement(By.CssSelector("#shipping_method > li > label > span")); // Shipping cost
         private IWebElement _total => _driver.FindElement(By.CssSelector(".order-total > td:nth-child(2)")); // The total cost of price + shipping
         private IWebElement _returnToShop => _driver.FindElement(By.LinkText("Return to shop"));
-        
+        private IWebElement _productName => _driver.FindElement(By.CssSelector("td.product-name"));
         //getters and setters for various fields such as: coupons, price, discount etc.
         public string Coupon
         {
@@ -54,12 +54,12 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
         }
 
-        public decimal Price
+        public decimal SubTotal
         {
             get
             {
                 StaticWaitForElement(_driver, By.CssSelector("td.product-subtotal > span:nth-child(1) > bdi:nth-child(1)"));
-                return ConvertToDecimal(_price.Text);
+                return ConvertToDecimal(_subtotal.Text);
             }
         }
 
@@ -90,6 +90,14 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
         }
 
+        public string ProductName
+        {
+            get
+            {
+                StaticWaitForElement(_driver, By.CssSelector("td.product-name"), 2);
+                return _productName.Text;
+            }
+        }
 
         //Enters and Apply Coupon
         public void EnterAndApplyCoupon(string coupon)
@@ -98,29 +106,14 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             _applyButton.Click();
         }
 
-        //Removes clothing item from cart
-        public void RemoveFromCart()
-        {
-            try
-            {
-                StaticWaitForElement(_driver, By.LinkText("×"), 7);//Waits to see if the 'x' button is found to delete the item from teh cart
-                _removeItem.Click();
-            }
-            catch
-            {
-                WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(3));// Waits to see if the coupon remove link is there
-                wait.Until(drv => drv.FindElements(By.LinkText("[Remove]")).Count == 0);// If there arent any, then we can proceed to delete item from cart
-                //Thread.Sleep(2000);
-                _removeItem.Click();
-            }
-
-        }
         //Waits to see if Return to shop button appears as it indicates cart is empty
-        public void CheckCartIsEmpty()
+        public void ReturnToShop()
         {
-            StaticWaitForElement(_driver, By.LinkText("Return to shop"));
-            _returnToShop.Click();
-
+            if (CheckIfCartIsEmpty())
+            {
+                _returnToShop.Click();
+            }
+           
         }
         //Removes applied coupon code
         public void RemoveCoupon()
@@ -132,10 +125,8 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         //Deletes all item from cart
         public void DeleteItemsFromCart()
         {
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));// Waits to see if the coupon remove link is there
-            while (wait.Until(drv => drv.FindElements(By.LinkText("×")).Count > 0))
+            while(_driver.FindElements(By.LinkText("×")).Count > 0)
             {
-
                 try
                 {
                     ClickElementInView(_driver, _removeItem);
@@ -146,14 +137,22 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
                 }
             }
         }
+        //Check if cart is empty
+        public bool CheckIfCartIsEmpty()
+        {
+
+            StaticWaitForElement(_driver, By.LinkText("Return to shop"), 3);
+            return _returnToShop.Displayed;
+        }
 
         //Cart Clean Up Process
         public void CartCleanUp()
         {
             RemoveCoupon();//Removes coupon
             DeleteItemsFromCart();//Removes item from cart
-            CheckCartIsEmpty(); //Check if cart is empty and clicks return to shop
+            ReturnToShop(); //Check if cart is empty and clicks return to shop
         }
+
     }
 }
 

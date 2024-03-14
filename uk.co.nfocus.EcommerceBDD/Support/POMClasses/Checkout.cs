@@ -21,7 +21,15 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         public Checkout(IWebDriver driver)
         {
             _driver = driver;
-            Assert.That(_driver.Url, Is.EqualTo("https://www.edgewordstraining.co.uk/demo-site/checkout/"));
+            try
+            {
+                Assert.That(_driver.Url, Is.EqualTo("https://www.edgewordstraining.co.uk/demo-site/checkout/"));
+            }
+            catch
+            {
+                TakeFullPageScreenshot(_driver, "Wrong_URL");
+                Console.WriteLine("Cannot proceed to checkout because cart is empty");
+            }
         }
 
         // Locators for finding Elements to fill out the Billing information

@@ -77,6 +77,16 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             Username = username;
             Password = password;
+
+            if(username == null)
+            {
+                Username = "hellogen@edgewords.co.uk";
+            }
+            else if(password == null)
+            {
+                Password = "HelloEdgewords!23";
+            }
+
             ClickLoginButton();
 
             try

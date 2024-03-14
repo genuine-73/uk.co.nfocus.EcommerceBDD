@@ -20,11 +20,13 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         private IWebDriver _driver;
         private Cart _cart;
         private NavBar _navbar;
+        string item;
         public ApplyingACouponStepDefinitions(ScenarioContext scenarioContext, WDWrapper wrapper)
         {
             _scenarioContext = scenarioContext;
             _driver = wrapper.Driver;
         }
+
 
 
         [When(@"(?:I|i) view cart to apply coupon '(.*)'")]
@@ -33,11 +35,29 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Navigates to cart
             _navbar = (NavBar)_scenarioContext["navbar"];
             _navbar.GoToCart();
+            Console.WriteLine("Successfully navigated to cart page");
 
-            //Entering Coupon and Apply
+            //Instantiating an instance of a cart class
             _cart = new Cart(_driver);
-            _cart.EnterAndApplyCoupon(coupon);
-            Console.WriteLine("Successfully applied coupon code");
+
+            try
+            {
+                //Retrieving scenario context object that was passed
+                item = (string)_scenarioContext["item"];
+
+                //Checks to see if the cart is not empty
+                Assert.That(_cart.ProductName, Is.EqualTo(item));
+
+                //Entering Coupon and Apply
+                _cart = new Cart(_driver);
+                _cart.EnterAndApplyCoupon(coupon);
+                Console.WriteLine("Successfully applied coupon code");
+            }
+            catch
+            {
+                TakeFullPageScreenshot(_driver, "CartIsEmpty");
+                Console.WriteLine("Nothing has been added to the cart");
+            }
 
         }
 
@@ -48,7 +68,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Test to see if discount works
             try
             {
-                Assert.That(_cart.Discount, Is.EqualTo((ConvertToDecimal(discount)/100) * _cart.Price));
+                Assert.That(_cart.Discount, Is.EqualTo((ConvertToDecimal(discount)/100) * _cart.SubTotal));
                 Console.WriteLine("The discount applied is correct!");
                 // Take Screenshot of Cart Page
                 TakeFullPageScreenshot(_driver, "Coupon_Applied_Correctly", "TestCaseOne");
@@ -63,7 +83,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Tests if the total calculated is correct
             try
             {
-                Assert.That(_cart.Total, Is.EqualTo(_cart.Price - _cart.Discount + _cart.ShippingCost));
+                Assert.That(_cart.Total, Is.EqualTo(_cart.SubTotal - _cart.Discount + _cart.ShippingCost));
                 Console.WriteLine("The total is correct!");
                 // Take Screenshot of Cart Page
                 TakeFullPageScreenshot(_driver, "Total_Applied_Correctly", "TestCaseOne");

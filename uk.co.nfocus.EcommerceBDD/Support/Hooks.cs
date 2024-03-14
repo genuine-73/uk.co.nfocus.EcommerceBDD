@@ -45,6 +45,14 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             //Retrieves the enviornment variable browser set on .runsettings file
             string browser = Environment.GetEnvironmentVariable("BROWSER");
 
+            //Sanitation check in case the browser is null
+            if (browser == null)
+            {
+                browser = "edge"; // creates edge as default
+                Console.WriteLine("BROWSER env not set: Setting to Edge");
+            }
+
+
             //picks a browser from the options below
             switch (browser)
             {
@@ -60,11 +68,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support
                     _driver = new ChromeDriver();
                     break;
 
-                //Sanitation check in case browser is null
-                default:
-                    _driver = new FirefoxDriver(); 
-                    break;
-
             }
             Console.WriteLine("Browser set to " + browser);
             _wrapper.Driver = _driver;
@@ -73,7 +76,15 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             _driver.Manage().Window.Maximize();
 
             //Navigates to the homepage of E-commerce website
-            _driver.Url = "https://www.edgewordstraining.co.uk/demo-site/";
+            string startURL = TestContext.Parameters["WebAppURL"];
+            
+            if(startURL == null)
+            {
+                startURL = "https://www.edgewordstraining.co.uk/demo-site/";
+                Console.WriteLine("URL has not been properly set \n default string has been passed to the URL");
+            }
+
+            _driver.Url = startURL;
             Console.WriteLine("Successfully loads E-Commerce Page");
 
         }
@@ -92,11 +103,13 @@ namespace uk.co.nfocus.EcommerceBDD.Support
                     //Clean up process. Getting rid of the coupon and all of the items from the cart
                     _cart = new Cart(_driver);
                     _cart.CartCleanUp();
+                    Console.WriteLine("Successfully removed the coupon and deleted items from the cart");
                 }
                 catch
                 {
                     //Takes a screenshot if anything
                     TakeFullPageScreenshot(_driver, "Deleting items from cart error");
+                    Console.WriteLine("Items have not been removed from the cart");
                 }
                 //Go to my account
                 _navbar.GoToAccount();

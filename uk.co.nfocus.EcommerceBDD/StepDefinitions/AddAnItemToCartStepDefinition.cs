@@ -27,18 +27,22 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         public void WhenIAddAnToMyCart(string item)
         {
             //Intialises shop object
-            Shop product = new Shop(_driver);
+            Shop shop = new Shop(_driver);
             try
             {
                 //Checks to see if the 'item' passed is in the shop page
-                Assert.That(true, Is.EqualTo(product.Containsitem(item)));
+                Assert.That(true, Is.EqualTo(shop.Containsitem(item)));
                 //If it exists, click the clothing item
-                product.ClickProduct(item);
+                shop.ClickProduct(item);
+                Console.WriteLine("Item exists and we have successfully opened it");
 
                 //Creates a clothing item object and adds that object to cart
                 ClothingItems clothingItems = new ClothingItems(_driver, item);
                 clothingItems.AddItemToCart();
                 Console.WriteLine("Successfully added an item to cart");
+
+                //Share in Applying a coupon section
+                _scenarioContext["item"] = item;
             }
             catch
             {
