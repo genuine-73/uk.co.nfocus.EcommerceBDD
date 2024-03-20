@@ -17,13 +17,12 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             this._driver = driver;
         }
 
-        private IWebElement _orderNo => _driver.FindElement(By.CssSelector("#post-6 > div > div > div > ul > li.woocommerce-order-overview__order.order > strong"));
+        private IWebElement _orderNo => StaticWaitForElement(_driver, By.CssSelector("#post-6 > div > div > div > ul > li.woocommerce-order-overview__order.order > strong"));
 
         public string OrderNo
         {
             get
             {
-                StaticWaitForElement(_driver, By.CssSelector("#post-6 > div > div > div > ul > li.woocommerce-order-overview__order.order > strong"));
                 return _orderNo.Text;
             }
         }

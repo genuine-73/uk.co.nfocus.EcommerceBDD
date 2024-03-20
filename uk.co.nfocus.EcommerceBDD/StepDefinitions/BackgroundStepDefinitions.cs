@@ -33,7 +33,6 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         {
             //Instantiating navigation bar
             _navbar = new NavBar(_driver);
-            _scenarioContext["navbar"] = _navbar;
 
             //Instantiating Dismiss button
             PopUps dismiss = new PopUps(_driver);
@@ -47,26 +46,37 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             Console.WriteLine("Successfully navigated to MyAccount Page");
         }
 
-        [When(@"(?:I|i) have logged in using valid login credentials")]
+        [Given(@"(?:I|i) have logged in using valid login credentials")]
         public void GivenIHaveLoggedInUsingValidCredentials()
         {
 
             _myAccount = new MyAccount(_driver);
             //retrieves the username environment variable set in .runsettings
             string username = Environment.GetEnvironmentVariable("SECRET_USERNAME");
+
+            if (username == null)
+            {
+                username = "hellogen@edgewords.co.uk";
+                Console.WriteLine("USERNAME env not set: Setting username ...");
+            }
+
             //retrieves the password environment varibale set in .runsettings
-            string password = Environment.GetEnvironmentVariable("SECRET_PASSWORD"); 
-           
+            string password = Environment.GetEnvironmentVariable("SECRET_PASSWORD");
+
+            if (password == null)
+            {
+                password = "HelloEdgewords!23";
+                Console.WriteLine("Password env not set: Setting password ...");
+            }
+
             //Checks if you have successully logged in
             bool loggedIn = _myAccount.LoginExpectSuccess(username, password);
             Assert.That(loggedIn, Is.True, "We did not login");
             Console.WriteLine("Successfully logged in");
             
-            //Used to logout during logout process
-            _scenarioContext["_myAccount"] = _myAccount;
         }
 
-        [When(@"I navigate to the Shop page")]
+        [Given(@"I navigate to the Shop page")]
         public void WhenINavigateToTheShopPage()
         {
             //Go To Shop

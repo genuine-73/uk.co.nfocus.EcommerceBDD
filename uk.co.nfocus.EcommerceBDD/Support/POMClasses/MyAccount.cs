@@ -19,13 +19,13 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         public MyAccount(IWebDriver driver) : base(driver)
         {
             this._driver = driver;
-            Assert.That(_driver.Url, Is.EqualTo("https://www.edgewordstraining.co.uk/demo-site/my-account/"));
+            Assert.That(_driver.Url, Does.Contain("https://www.edgewordstraining.co.uk/demo-site/my-account/"));
         }
 
         //Locators - finding elements on the page
-        private IWebElement _loginUsername => _driver.FindElement(By.Id("username"));
-        private IWebElement _loginPassword => _driver.FindElement(By.Id("password"));
-        private IWebElement _loginButton => _driver.FindElement(By.Name("login"));
+        private IWebElement _loginUsername => StaticWaitForElement(_driver, By.Id("username"));
+        private IWebElement _loginPassword => StaticWaitForElement(_driver, By.Id("password"));
+        private IWebElement _loginButton => StaticWaitForElement(_driver, By.Name("login"));
 
 
         //Service methods
@@ -34,7 +34,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             get //getters for Username in C# style
             {
-                StaticWaitForElement(_driver, By.Id("password"));
                 return _loginUsername.GetAttribute("value");
             }
             set //setters for Username in C# style
@@ -48,7 +47,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             get //getters for Password in C# style
             {
-                StaticWaitForElement(_driver, By.Id("password"));
                 return _loginPassword.GetAttribute("value");
             }
             set //setters for Password in C# style
@@ -68,7 +66,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         //Used to find if we have successfully logged out
         public bool CheckLoginButton()
         {
-            StaticWaitForElement(_driver, By.Name("login"));
             return _loginButton.Displayed;
         }
 
@@ -77,15 +74,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             Username = username;
             Password = password;
-
-            if(username == null)
-            {
-                Username = "hellogen@edgewords.co.uk";
-            }
-            else if(password == null)
-            {
-                Password = "HelloEdgewords!23";
-            }
 
             ClickLoginButton();
 

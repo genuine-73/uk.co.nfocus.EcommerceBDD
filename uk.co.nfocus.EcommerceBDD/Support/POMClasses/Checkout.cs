@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static uk.co.nfocus.EcommerceBDD.Support.StaticHelperLib;
 using NUnit.Framework;
+using System.Diagnostics.Metrics;
 
 namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
 {
@@ -33,24 +34,22 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         }
 
         // Locators for finding Elements to fill out the Billing information
-        private IWebElement _firstName => _driver.FindElement(By.Id("billing_first_name")); 
-        private IWebElement _secondName => _driver.FindElement(By.Id("billing_last_name"));
-        private IWebElement _address => _driver.FindElement(By.Id("billing_address_1"));
-        private IWebElement _city => _driver.FindElement(By.Id("billing_city"));
-        private IWebElement _postcode => _driver.FindElement(By.Id("billing_postcode"));
-        private IWebElement _phoneNo => _driver.FindElement(By.Id("billing_phone"));
-        private IWebElement _placeOrder => _driver.FindElement(By.Id("place_order"));
-        private IWebElement _country => _driver.FindElement(By.Id("select2-billing_country-container"));
-        private IWebElement _checkPayments => _driver.FindElement(By.Id("payment_method_cheque"));
-        private IWebElement _cashOnDelivery => _driver.FindElement(By.Id("payment_method_cod"));
-        
+        private IWebElement _firstName => StaticWaitForElement(_driver, By.Id("billing_first_name")); 
+        private IWebElement _secondName => StaticWaitForElement(_driver, By.Id("billing_last_name"));
+        private IWebElement _address => StaticWaitForElement(_driver, By.Id("billing_address_1"));
+        private IWebElement _city => StaticWaitForElement(_driver, By.Id("billing_city"));
+        private IWebElement _postcode => StaticWaitForElement(_driver, By.Id("billing_postcode"));
+        private IWebElement _phoneNo => StaticWaitForElement(_driver, By.Id("billing_phone"));
+        private IWebElement _placeOrder => StaticWaitForElement(_driver, By.Id("place_order"));
+        private IWebElement _country => StaticWaitForElement(_driver, By.Id("select2-billing_country-container"));
+        private IWebElement _checkPayments => StaticWaitForElement(_driver, By.Id("payment_method_cheque"));
+        private IWebElement _cashOnDelivery => StaticWaitForElement(_driver, By.Id("Payment_method_cod"));
         //Service Methods
         //Getters and Setters for all of the billing details fields
         public string FirstName
         {
             get
             {
-                StaticWaitForElement(_driver, By.Id("billing_first_name"));
                 return _firstName.GetAttribute("value");
             }
             set
@@ -61,24 +60,23 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         }
 
         public string SecondName
-        {
+        {           
             get
-            {
-                StaticWaitForElement(_driver, By.Id("billing_last_name"));
+            {               
+                     
                 return _secondName.GetAttribute("value");
             }
-            set
-            {
-                _secondName.Clear();
-                _secondName.SendKeys(value);
+            set    
+            {     
+                _secondName.Clear();   
+                _secondName.SendKeys(value);         
             }
         }
-
+               
         public string Address
         {
             get
             {
-                StaticWaitForElement(_driver, By.Id("billing_address_1"));
                 return _address.GetAttribute("value");
             }
             set
@@ -92,7 +90,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             get
             {
-                StaticWaitForElement(_driver, By.Id("billing_city"));
                 return _city.GetAttribute("value");
             }
             set
@@ -106,7 +103,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             get
             {
-                StaticWaitForElement(_driver, By.Id("billing_postcode"));
                 return _postcode.GetAttribute("value");
             }
             set
@@ -120,7 +116,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             get
             {
-                StaticWaitForElement(_driver, By.Id("billing_phone"));
                 return _phoneNo.GetAttribute("value");
             }
             set
@@ -130,68 +125,28 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
         }
 
+        public string Country
+        {
+            get
+            {
+                return _country.Text;
+            }
 
-
-        //Service Methods
-        //Fills the billing details needed to check payment and place an order
-
-        //Sets the first name
-        public Checkout SetFirstName(string firstname)
-        {
-            FirstName = firstname;
-            return this;
-        }
-        //Sets the surname
-        public Checkout SetSecondName(string secondName)
-        {
-            SecondName = secondName;
-            return this;
-        }
-        //Sets the address
-        public Checkout SetAddress(string address)
-        {
-            Address = address;
-            return this;
-        }
-        //Sets the city
-        public Checkout SetCity(string city)
-        {
-            City = city;
-            return this;
+            set
+            {
+                SelectElement dropdown = new SelectElement(_driver.FindElement(By.Id("billing_country")));
+                dropdown.SelectByText(value);
+            }
         }
 
-        //Sets the Postcode
 
-        public Checkout SetPostCode(string postcode)
-        {
-            Postcode = postcode;
-            return this;
-        }
-
-        //Sets the Phone number
-        public Checkout SetPhoneNo(string phone)
-        {
-            PhoneNo = phone;
-            return this;
-        }
-
-        //Chooses the country from the dropdown list
-        public Checkout SetCountry(string country)
-        {
-            StaticWaitForElement(_driver, By.Id("billing_country"));
-            SelectElement dropdown = new SelectElement(_driver.FindElement(By.Id("billing_country")));
-            dropdown.SelectByText(country);
-            return this;
-        }
-        
-        //Clicks Place Order button to complete transaction
+        //Clicks Place Order button to complete transactions
         public void ClickPlaceOrder()
         {
 
             try
             {
                 //try to search for element and click it when found
-                StaticWaitForElement(_driver, By.Id("place_order"), 7);
                 _placeOrder.Click();
             }
             catch (Exception)
@@ -206,14 +161,15 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             try
             {
-                StaticWaitForElement(_driver, By.CssSelector("li.wc_payment_method:nth-child(1)"));
-                _checkPayments.Click();
+                ScrollElementIntoView(_driver, _cashOnDelivery);
+                _cashOnDelivery.Click();
             }
             catch
             {
-                ScrollElementIntoView(_driver, _checkPayments);
-                ClickElementInView(_driver, _checkPayments);
-               
+
+                //ScrollElementIntoView(_driver, _checkPayments);
+                //ClickElementInView(_driver, _placeOrder);
+
             }
         }
 

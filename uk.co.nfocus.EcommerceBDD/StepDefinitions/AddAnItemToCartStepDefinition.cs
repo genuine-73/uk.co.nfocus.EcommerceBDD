@@ -22,34 +22,19 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _driver = wrapper.Driver;
 
         }
-
-            [When(@"I add '(.*)' to my (?i)cart(?-i)")]
+                            
+        [When(@"I add '(.*)' to my (?i)cart(?-i)")] 
         public void WhenIAddAnToMyCart(string item)
         {
             //Intialises shop object
-            Shop shop = new Shop(_driver);
-            try
-            {
-                //Checks to see if the 'item' passed is in the shop page
-                Assert.That(true, Is.EqualTo(shop.Containsitem(item)));
-                //If it exists, click the clothing item
-                shop.ClickProduct(item);
-                Console.WriteLine("Item exists and we have successfully opened it");
+            ShopPagePOM shopPage = new ShopPagePOM(_driver, item);
 
-                //Creates a clothing item object and adds that object to cart
-                ClothingItems clothingItems = new ClothingItems(_driver, item);
-                clothingItems.AddItemToCart();
-                Console.WriteLine("Successfully added an item to cart");
+            //If it exists, click the clothing item
+            shopPage.ClickAddToCart().CheckViewCart();
+            Console.WriteLine("Successfully added an item to cart");
 
-                //Share in Applying a coupon section
-                _scenarioContext["item"] = item;
-            }
-            catch
-            {
-                //If an exception is raised in this case where the item does not exist, takes a screenshot
-                TakeFullPageScreenshot(_driver, "ItemDoesNotExist");
-                Console.WriteLine("Item does not exist");
-            }
+            //Sharing value - to be used in applying a coupon step definition
+            _scenarioContext["item"] = item;
         }
     }
 }

@@ -9,6 +9,7 @@ using OpenQA.Selenium.Support.Extensions;
 using System.Globalization;
 using System.Reflection;
 using NUnit.Framework;
+using System.Data;
 
 namespace uk.co.nfocus.EcommerceBDD.Support
 {
@@ -16,13 +17,18 @@ namespace uk.co.nfocus.EcommerceBDD.Support
     internal class StaticHelperLib
     {
         private static IJavaScriptExecutor? jsdriver;
-        
+
         //Helper method to wait for element to load.
-        public static void StaticWaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5)
+        public static IWebElement StaticWaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5)
         {
             WebDriverWait myWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-            myWait.Until(drv => drv.FindElement(locator).Enabled);
+            return myWait.Until(drv =>
+            {
+                IWebElement element = drv.FindElement(locator);
+                return element.Displayed ? element : null;
+            });
         }
+
 
         public static void TakeFullPageScreenshot(IWebDriver driver, string filename, string subfolderName = null)
         {

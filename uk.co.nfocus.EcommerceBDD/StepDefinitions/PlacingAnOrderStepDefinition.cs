@@ -44,17 +44,19 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 
             //Instantiating Checkour class and filling details
             _checkout = new Checkout(_driver);
-            _checkout.SetFirstName(_billingDetailsPOCO.FirstName)
-                         .SetSecondName(_billingDetailsPOCO.SecondName)
-                         .SetCountry(_billingDetailsPOCO.Country)
-                         .SetAddress(_billingDetailsPOCO.Address)
-                         .SetCity(_billingDetailsPOCO.City)
-                         .SetPostCode(_billingDetailsPOCO.Postcode)
-                         .SetPhoneNo(_billingDetailsPOCO.PhoneNo);
+            _checkout.FirstName = _billingDetailsPOCO.FirstName;
+            _checkout.SecondName = _billingDetailsPOCO.SecondName;
+            _checkout.Country = _billingDetailsPOCO.Country;
+            _checkout.Address = _billingDetailsPOCO.Address;
+            _checkout.City = _billingDetailsPOCO.City;
+            _checkout.Postcode = _billingDetailsPOCO.Postcode;
+            _checkout.PhoneNo= _billingDetailsPOCO.PhoneNo;
 
             Console.WriteLine("Successfully filled out billing details");
         }
-        [Then(@"(?:I|i) should see an order summary")]
+
+        [Then(@"I should see an order summary of my latest order with the order number")]
+        
         public void ThenIShouldSeeAnOrderSummary()
         {
             //Checks Payment Radio Button
@@ -75,8 +77,8 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             Console.WriteLine("Successfully retrieved the order number");
             _scenarioContext["_orderNo"] = orderNo; //Allows to share objects between sets  
         }
-
-        [Then(@"access it from my orders portal")]
+          
+        [Then(@"see the same order number when I navigate to my orders tab in my account")]
         public void ThenAccessItFromMyOrdersPortal()
         {
             //Navigates to MyAccount Page

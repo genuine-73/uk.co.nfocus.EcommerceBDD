@@ -20,7 +20,8 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         private IWebDriver _driver;
         private Cart _cart;
         private NavBar _navbar;
-        string item;
+        private ShopPagePOM _shop;
+        private string _item;
         public ApplyingACouponStepDefinitions(ScenarioContext scenarioContext, WDWrapper wrapper)
         {
             _scenarioContext = scenarioContext;
@@ -32,36 +33,21 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         [When(@"(?:I|i) view cart to apply coupon '(.*)'")]
         public void WhenApplyCoupon(string coupon)
         {
-            //Navigates to cart
-            _navbar = (NavBar)_scenarioContext["navbar"];
-            _navbar.GoToCart();
-            Console.WriteLine("Successfully navigated to cart page");
+            //unwrapping values
+            _item = (string)_scenarioContext["item"];
 
-            //Instantiating an instance of a cart class
+            //Click View Cart
+            _shop = new ShopPagePOM(_driver, _item);
+            _shop.ClickViewCart();
+
+            //Entering Coupon and Apply
             _cart = new Cart(_driver);
-
-            try
-            {
-                //Retrieving scenario context object that was passed
-                item = (string)_scenarioContext["item"];
-
-                //Checks to see if the cart is not empty
-                Assert.That(_cart.ProductName, Is.EqualTo(item));
-
-                //Entering Coupon and Apply
-                _cart = new Cart(_driver);
-                _cart.EnterAndApplyCoupon(coupon);
-                Console.WriteLine("Successfully applied coupon code");
-            }
-            catch
-            {
-                TakeFullPageScreenshot(_driver, "CartIsEmpty");
-                Console.WriteLine("Nothing has been added to the cart");
-            }
-
+            _cart.EnterAndApplyCoupon(coupon);
+            Console.WriteLine("Successfully applied coupon code");
+            
         }
 
-        [Then(@"(?:I|i) should get '(.*)'% off my selected item")]
+        [Then(@"I should get '(.*)'% off my selected item")]
         public void ThenIShouldGetOffMySelectedItem(string discount)
         {
 
@@ -94,6 +80,14 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
                 TakeFullPageScreenshot(_driver, "TotalCostError", "TestCaseOne");
                 Console.WriteLine("The total is incorrect");
             }
+
+            //Clean up process. Getting rid of the coupon and all of the items from the cart
+            _cart.CartCleanUp();
+            Console.WriteLine("Successfully removed the coupon and deleted items from the cart");
+
+            //Go to Account
+            _navbar = new NavBar(_driver);
+            _navbar.GoToAccount();
 
         }
     }

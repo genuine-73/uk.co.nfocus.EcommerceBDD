@@ -21,12 +21,12 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         }
 
         //Locators - find the most recent order  order
-        private IWebElement _latestOrder => _driver.FindElement(By.CssSelector("tr.woocommerce-orders-table__row:nth-child(1) > td:nth-child(1)"));
+        private IWebElement _latestOrder => StaticWaitForElement( _driver, By.CssSelector("tr.woocommerce-orders-table__row:nth-child(1) > td:nth-child(1)"));
 
         //returns the latest order number
         public string ViewLatestOrder()
         {
-            StaticWaitForElement(_driver, By.CssSelector("tr.woocommerce-orders-table__row:nth-child(1) > td:nth-child(1)"));
+
             return _latestOrder.Text;
         }
 

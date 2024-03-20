@@ -82,7 +82,7 @@ namespace uk.co.nfocus.EcommerceBDD.Features
  testRunner.Given("I am on the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 10
- testRunner.When("I have logged in using valid login credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+  testRunner.And("I have logged in using valid login credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 11
   testRunner.And("I navigate to the Shop page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -125,7 +125,7 @@ this.FeatureBackground();
  testRunner.When(string.Format("I add \'{0}\' to my cart", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
- testRunner.And(string.Format("I view cart to apply coupon \'{0}\'", coupon), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And(string.Format("I view cart to apply coupon \'{0}\'", coupon), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 17
  testRunner.Then(string.Format("I should get \'{0}\'% off my selected item", discount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -183,13 +183,13 @@ this.FeatureBackground();
                             "W1J 7NT",
                             "01632 907767"});
 #line 28
- testRunner.And("I fill the billing details to place an order in checkout", ((string)(null)), table1, "And ");
+  testRunner.And("I fill the billing details to place an order in checkout", ((string)(null)), table1, "And ");
 #line hidden
 #line 31
- testRunner.Then("I should see an order summary", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see an order summary of my latest order with the order number", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 32
- testRunner.And("access it from my orders portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("see the same order number when I navigate to my orders tab in my account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

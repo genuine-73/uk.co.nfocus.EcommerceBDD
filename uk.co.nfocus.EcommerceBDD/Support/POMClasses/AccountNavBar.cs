@@ -20,28 +20,25 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         }
 
         //Locators - finds the button to navigate within the MyAccount class
-        private IWebElement _dashboard => _driver.FindElement(By.LinkText("Dashboard"));
-        private IWebElement _ordersButton => _driver.FindElement(By.LinkText("Orders"));
-        private IWebElement _logoutButton => _driver.FindElement(By.LinkText("Logout"));
+        private IWebElement _dashboard => StaticWaitForElement(_driver, By.LinkText("Dashboard"));
+        private IWebElement _ordersButton => StaticWaitForElement(_driver, By.LinkText("Orders"));
+        private IWebElement _logoutButton => StaticWaitForElement(_driver, By.LinkText("Logout"));
 
         //Service methods
         //Navigates to the dashboard
         public void ClickDashboard()
         {
-            StaticWaitForElement(_driver, By.LinkText("Dashboard"));
             _dashboard.Click();
         }
         //Navigates to the Orders Button tab
         public void ClickOrdersButton()
         {
-            StaticWaitForElement(_driver, By.LinkText("Orders"));
             _ordersButton.Click();
         }
 
         //Clicks Logout Button
         public void ClickLogoutButton()
         {
-            StaticWaitForElement(_driver, By.LinkText("Logout"));
             _logoutButton.Click();
         }
 
