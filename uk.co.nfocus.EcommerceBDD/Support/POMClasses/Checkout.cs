@@ -42,8 +42,8 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _phoneNo => StaticWaitForElement(_driver, By.Id("billing_phone"));
         private IWebElement _placeOrder => StaticWaitForElement(_driver, By.Id("place_order"));
         private IWebElement _country => StaticWaitForElement(_driver, By.Id("select2-billing_country-container"));
-        private IWebElement _checkPayments => StaticWaitForElement(_driver, By.Id("payment_method_cheque"));
-        private IWebElement _cashOnDelivery => StaticWaitForElement(_driver, By.Id("Payment_method_cod"));
+        private IWebElement _checkPayments => WaitForElement(_driver, By.CssSelector("li.wc_payment_method.payment_method_cheque"));
+        private IWebElement _cashOnDelivery => WaitForElement(_driver, By.CssSelector("li.wc_payment_method.payment_method_cod"));
         //Service Methods
         //Getters and Setters for all of the billing details fields
         public string FirstName
@@ -146,12 +146,11 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
 
             try
             {
-                //try to search for element and click it when found
                 _placeOrder.Click();
             }
             catch (Exception)
             {
-                ClickElementInView(_driver, _placeOrder);
+                //Do nothing
             }
 
         }
@@ -161,14 +160,12 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             try
             {
-                ScrollElementIntoView(_driver, _cashOnDelivery);
-                _cashOnDelivery.Click();
+               _cashOnDelivery.Click();
             }
             catch
             {
 
-                //ScrollElementIntoView(_driver, _checkPayments);
-                //ClickElementInView(_driver, _placeOrder);
+                //Do nothing
 
             }
         }

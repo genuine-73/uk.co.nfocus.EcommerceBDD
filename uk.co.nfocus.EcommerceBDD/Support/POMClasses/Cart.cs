@@ -29,7 +29,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         }
 
         //Locators for finding various elements on cart page
-        private IWebElement _removeItem => StaticWaitForElement(_driver, By.LinkText("×")); //Finds the 'x' button the delete items from the cart
+        private IWebElement _removeItem => WaitForElement(_driver, By.LinkText("×")); //Finds the 'x' button the delete items from the cart
         private IWebElement _couponCode => StaticWaitForElement(_driver, By.Id("coupon_code")); // Finds the field to enter coupon code
         private IWebElement _applyButton => StaticWaitForElement( _driver, By.Name("apply_coupon")); //Finds the apply coupon button 
         private IWebElement _removeCoupon => StaticWaitForElement(_driver, By.LinkText("[Remove]")); //Finds the [Remove] link to clear coupon 
@@ -115,7 +115,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             {
                 try
                 {
-                    ClickElementInView(_driver, _removeItem);
+                    _removeItem.Click();
                 }
                 catch
                 {

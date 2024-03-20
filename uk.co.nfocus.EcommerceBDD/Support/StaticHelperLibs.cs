@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Reflection;
 using NUnit.Framework;
 using System.Data;
+using SeleniumExtras.WaitHelpers;
 
 namespace uk.co.nfocus.EcommerceBDD.Support
 {
@@ -25,10 +26,18 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             return myWait.Until(drv =>
             {
                 IWebElement element = drv.FindElement(locator);
-                return element.Displayed ? element : null;
+                return element.Enabled ? element : null;    
             });
         }
 
+        public static IWebElement WaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5)
+        {
+            WebDriverWait myWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            By blockUI = By.CssSelector(".blockUI.blockOverlay");
+            myWait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(blockUI));   
+            myWait.Until(ExpectedConditions.InvisibilityOfElementLocated(blockUI));
+            return driver.FindElement(locator);
+        }
 
         public static void TakeFullPageScreenshot(IWebDriver driver, string filename, string subfolderName = null)
         {
@@ -40,12 +49,14 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             //Takes a screenshot of the order page
             Screenshot screenshot = driver.TakeScreenshot();
             screenshot.SaveAsFile(filepath);
-            //Adds attachment
+            
+            //Adds attachment 
             TestContext.AddTestAttachment(filepath, $"{filename}_{dateTime}.png");
+            // 
         }
-        
+       
         // Calculates the discount
-        public static decimal ConvertToDecimal(string price)
+        public static decimal ConvertToDecimal(string price)           
         {
             NumberStyles style = NumberStyles.Currency | NumberStyles.AllowCurrencySymbol;
             CultureInfo provider = new CultureInfo("en-GB");

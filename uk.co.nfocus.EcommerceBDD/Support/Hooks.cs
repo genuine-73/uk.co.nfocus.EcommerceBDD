@@ -76,11 +76,6 @@ DeleteItemsFromCart() is a bit “janky”. Because you’re using a JS click wh
 
  
 
- 
- 
-
- 
-
 StepDefinitions/BackgroudStepDefs
 
 
