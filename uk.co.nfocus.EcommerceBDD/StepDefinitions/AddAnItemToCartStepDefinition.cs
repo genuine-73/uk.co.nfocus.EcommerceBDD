@@ -12,7 +12,7 @@ using static uk.co.nfocus.EcommerceBDD.Support.StaticHelperLib;
 
 namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 {
-    [Binding]
+    [Binding]     
     internal class AddAnItemToCartStepDefinition
     {
         private IWebDriver _driver;
@@ -36,12 +36,11 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _specFlowOutputHelper.WriteLine("Successfully navigated to shop page");
 
             //Intialises shop object
-            //ShopPagePOM shopPage = new ShopPagePOM(_driver, item);
             ShopPagePOM shopPage = new ShopPagePOM(_driver);
 
             //If it exists, click the clothing item
             bool value = shopPage.AddItemToCartSuccess(item);
-            Assert.That(value, Is.EqualTo(true));
+            Assert.That(value, Is.EqualTo(true),$"Item: {item} does not exist");
 
             shopPage.ClickAddToCart().CheckViewCart();
             _specFlowOutputHelper.WriteLine("Successfully added an item to cart");

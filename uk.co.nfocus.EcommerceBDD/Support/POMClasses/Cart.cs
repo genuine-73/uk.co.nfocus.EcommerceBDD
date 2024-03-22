@@ -38,8 +38,8 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _shippingCost => StaticWaitForElement(_driver, By.CssSelector("#shipping_method > li > label > span")); // Shipping cost
         private IWebElement _total => StaticWaitForElement(_driver, By.CssSelector(".order-total > td:nth-child(2)")); // The total cost of price + shipping
         private IWebElement _returnToShop => WaitForElement(_driver, By.LinkText("Return to shop"));
-
-        //getters and setters for various fields such as: coupons, price, discount etc.
+                    
+        //getters and setters for various fields such as: coupons, price, discount etc.  
         public string Coupon
         {
             get
@@ -95,12 +95,12 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         //Waits to see if Return to shop button appears as it indicates cart is empty
         public void ReturnToShop()
         {
-   
             _returnToShop.Click();
         }
         //Removes applied coupon code
         public void RemoveCoupon()
         {
+            ScrollElementIntoView(_driver, _removeCoupon);
             _removeCoupon.Click();
         }
 
@@ -128,14 +128,8 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
                 RemoveCoupon();
                 DeleteItemsFromCart();
             }
-            ReturnToShop();
+            //ReturnToShop();
             
         }
     }
 }
-
-  //finds the element
-  //clicks the x button, 
-  //waits until the the circle thing is gone and I get a banner saying its gone.
-  //From here I can either press x if there anymore
-  // or click return to shop if there is not any

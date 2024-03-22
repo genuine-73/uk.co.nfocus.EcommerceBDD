@@ -40,7 +40,6 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _item = (string)_scenarioContext["item"];
 
             //Click View Cart
-            //_shop = new ShopPagePOM(_driver, _item);
             _shop = new ShopPagePOM(_driver);
             _shop.ClickViewCart();
 
@@ -55,26 +54,30 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         public void CheckDiscountsApplied(string discount)
         {
 
-            //Test to see if discount works                        
+            //Test to see if discount works                           
             try
             {
-                Assert.That(_cart.Discount, Is.EqualTo((ConvertToDecimal(discount)/100) * _cart.SubTotal));
+                decimal newDiscount = ConvertToDecimal(discount);
+                decimal calculateDiscount = CalculateDiscount(newDiscount, _cart.SubTotal);
+                
+                Assert.That(_cart.Discount, Is.EqualTo(calculateDiscount), $"Wrong Discount value. Expected: {calculateDiscount} but was {_cart.Discount}");
                 _specFlowOutputHelper.WriteLine("The discount applied is correct!");
-                // Take Screenshot of Cart Page
-                TakeFullPageScreenshot(_driver, "Coupon_Applied_Correctly", "TestCaseOne");
-            }
+                
+            }      
             catch (Exception e)
             {
                 // Take Screenshot if an exception's occurs when discount is wrong
-                TakeFullPageScreenshot(_driver, "DiscountError", "TestCaseOne");
-                _specFlowOutputHelper.WriteLine("Discount has not been applied correctly");
+                TakeFullPageScreenshot(_driver, "DiscountError", "TestCaseOne");                               
+                _specFlowOutputHelper.WriteLine("Taking a screenshot to show the point of failure when calculating the discount applied");
             }
 
             //Tests if the total calculated is correct  
             try
             {
-                Assert.That(_cart.Total, Is.EqualTo(_cart.SubTotal - _cart.Discount + _cart.ShippingCost));
+                decimal total = _cart.SubTotal - _cart.Discount + _cart.ShippingCost;
+                Assert.That(_cart.Total, Is.EqualTo(total), $"Total calculated is incorrect. Expected: {total} but was {_cart.Discount}");
                 _specFlowOutputHelper.WriteLine("The total is correct!");
+                
                 // Take Screenshot of Cart Page
                 TakeFullPageScreenshot(_driver, "Total_Applied_Correctly", "TestCaseOne");
             }
@@ -82,7 +85,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             {
                 //Take Screenshot if an exception occurs in calculating the total.
                 TakeFullPageScreenshot(_driver, "TotalCostError", "TestCaseOne");
-                _specFlowOutputHelper.WriteLine("The total is incorrect");
+                _specFlowOutputHelper.WriteLine("Taking a screenshot to show the point of failure when calculating total cost");
             }
 
 

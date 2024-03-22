@@ -64,7 +64,7 @@ As this is the last assert of the test if it fails, rethrow the assertion in the
 
 By doing this the test will definitely report a fail. If you are using Specflow LivingDoc for reporting, catching all failed AssertionExceptions will result in a test reporting a pass.
 
- 
+  
 
 Further to this and more generally with try/catch and assertions – if you are always catching assertion errors and allowing the test to continue you can waste time. Try adding a non existent item to the cart (e.g. ‘Boo’) then place an order. Your test attempts to run far further than it can – it will e.g. navigate to the cart. When the requested item isn’t found execution should stop there for that test, and move on to the next.
 
@@ -176,7 +176,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support
                 _myAccount = new MyAccount(_driver);
                 //Logs the user out of the account
                 bool loggedout = _myAccount.LogoutExpectSuccess();
-                Assert.That(loggedout, Is.True, "We did not logout");
+                Assert.That(loggedout, Is.True, "Logout failure");
                 Console.WriteLine("Successfully logsout of the account");
 
                 // Closes the browser correctly

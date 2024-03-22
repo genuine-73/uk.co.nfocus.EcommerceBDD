@@ -150,8 +150,10 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
             catch (Exception)
             {
-                //Do nothing
-            }
+                ScrollElementIntoView(_driver, _checkPayments);
+                bool value = _checkPayments.Displayed;
+                _placeOrder.Click();
+            }  
 
         }
 
@@ -160,13 +162,12 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             try
             {
-               _checkPayments.Click();
+                _checkPayments.Click();
             }
             catch
             {
-
-                //Do nothing
-
+                Thread.Sleep(1500);
+                _checkPayments.Click();
             }
         }
 

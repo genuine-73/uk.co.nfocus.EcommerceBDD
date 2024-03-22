@@ -112,14 +112,14 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             string orderNo = (string)_scenarioContext["_orderNo"];
             try
             {
-                Assert.That(viewOrder.Substring(1, viewOrder.Length - 1), Is.EqualTo(orderNo));
-                _specFlowOutputHelper.WriteLine($"The order number from Checkout Page: {orderNo}, The order number from MyAccount->Orders: {viewOrder}");
+                Assert.That(viewOrder.Substring(1, viewOrder.Length - 1), Is.EqualTo(orderNo), $"The order number from Checkout Page: {orderNo}, The order number from MyAccount->Orders: {viewOrder}");
+                _specFlowOutputHelper.WriteLine($"The order number from Checkout Page: {orderNo} matches The order number from MyAccount->Orders: {viewOrder}");
             }
             catch (Exception)
             {
                 //Takes a screenshot if Test fails
                 TakeFullPageScreenshot(_driver, "Incorrect", "TestCaseTwo");
-                _specFlowOutputHelper.WriteLine("Successfully saves a screenshot if something goes wrong");
+                _specFlowOutputHelper.WriteLine("Takes screenshot to mark the order number from account does not match the order number from summary");
             }
         }
     }

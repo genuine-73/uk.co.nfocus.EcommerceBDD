@@ -19,8 +19,9 @@ namespace uk.co.nfocus.EcommerceBDD.Support
     {
         private static IJavaScriptExecutor? jsdriver;
 
+
         //Helper method to wait for element to load.
-        public static IWebElement StaticWaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5)
+        public static IWebElement StaticWaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5) 
         {
             WebDriverWait myWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
             return myWait.Until(drv =>
@@ -52,8 +53,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             }
         }
 
-
-
         public static void TakeFullPageScreenshot(IWebDriver driver, string filename, string subfolderName = null)
         {
             //Stores the current time stamp of test
@@ -84,6 +83,11 @@ namespace uk.co.nfocus.EcommerceBDD.Support
         {
             jsdriver = driver as IJavaScriptExecutor;
             jsdriver?.ExecuteScript("arguments[0].scrollIntoView()", element);
+        }
+
+        public static decimal CalculateDiscount(decimal discountPercent, decimal amount)
+        {
+            return (discountPercent / 100) * amount;
         }
 
     }

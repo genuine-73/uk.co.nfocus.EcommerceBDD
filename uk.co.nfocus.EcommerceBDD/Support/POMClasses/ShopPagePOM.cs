@@ -20,12 +20,14 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _addToCart => StaticWaitForElement(_driver, By.CssSelector($"a[aria-label=\"Add “{_item}” to your cart\"]"));
         private IWebElement _viewCart => StaticWaitForElement(_driver, By.LinkText("View cart"));
 
+        //Adds the chosen item to cart
         public ShopPagePOM ClickAddToCart()
         {
             _addToCart.Click();
             return this;
         }
 
+        //Checks if the item passed in exists.
         public bool AddItemToCartSuccess(string item)
         {
             _item = item;
@@ -38,6 +40,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
                 return false;
             }
         }
+        //Takes to the cart page
         public void ClickViewCart()
         {
             _viewCart.Click();
