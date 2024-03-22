@@ -11,10 +11,9 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
     {
         private IWebDriver _driver;
         private string _item;
-        public ShopPagePOM(IWebDriver driver, string item)
+        public ShopPagePOM(IWebDriver driver)
         {
             this._driver = driver;
-            this._item = item;
         }
 
         //Locators
@@ -27,6 +26,18 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             return this;
         }
 
+        public bool AddItemToCartSuccess(string item)
+        {
+            _item = item;
+            try
+            {
+                return _addToCart.Displayed;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public void ClickViewCart()
         {
             _viewCart.Click();

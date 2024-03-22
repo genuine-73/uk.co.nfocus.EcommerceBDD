@@ -26,18 +26,33 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             return myWait.Until(drv =>
             {
                 IWebElement element = drv.FindElement(locator);
-                return element.Enabled ? element : null;    
+                if (element.Enabled)
+                {
+                    return element;
+                }
+                else
+                {
+                    return null;
+                }   
             });
         }
 
         public static IWebElement WaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5)
         {
-            WebDriverWait myWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-            By blockUI = By.CssSelector(".blockUI.blockOverlay");
-            myWait.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(blockUI));   
-            myWait.Until(ExpectedConditions.InvisibilityOfElementLocated(blockUI));
-            return driver.FindElement(locator);
+            try
+            {
+                WebDriverWait myWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                By blockUI = By.CssSelector(".blockUI.blockOverlay");
+                myWait.Until(ExpectedConditions.InvisibilityOfElementLocated(blockUI));
+                return driver.FindElement(locator);
+            }
+            catch
+            {
+                return null;
+            }
         }
+
+
 
         public static void TakeFullPageScreenshot(IWebDriver driver, string filename, string subfolderName = null)
         {
@@ -52,8 +67,9 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             
             //Adds attachment 
             TestContext.AddTestAttachment(filepath, $"{filename}_{dateTime}.png");
-            // 
+            
         }
+
        
         // Calculates the discount
         public static decimal ConvertToDecimal(string price)           
@@ -70,12 +86,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             jsdriver?.ExecuteScript("arguments[0].scrollIntoView()", element);
         }
 
-        //Click on the chosen element
-        public static void ClickElementInView(IWebDriver driver, IWebElement element)
-        {
-            jsdriver = driver as IJavaScriptExecutor;
-            jsdriver?.ExecuteScript("arguments[0].click()", element);
-        }
     }
 }
 

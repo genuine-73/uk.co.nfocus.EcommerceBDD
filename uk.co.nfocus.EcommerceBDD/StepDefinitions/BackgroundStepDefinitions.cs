@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechTalk.SpecFlow.Infrastructure;
 using uk.co.nfocus.EcommerceBDD.StepDefinitions;
 using uk.co.nfocus.EcommerceBDD.Support;
 using uk.co.nfocus.EcommerceBDD.Support.POMClasses;
@@ -17,19 +18,21 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
     {
         //Variable declaration
         private readonly ScenarioContext _scenarioContext;
+        private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
         private IWebDriver _driver;
         private NavBar _navbar;
         private MyAccount _myAccount;
 
         //BackgroundStepDefinition Constructor
-        public BackgroundStepDefinitions(ScenarioContext scenarioContext, WDWrapper wrapper)
+        public BackgroundStepDefinitions(ScenarioContext scenarioContext, WDWrapper wrapper, ISpecFlowOutputHelper specFlowOutputHelper)
         {
             _scenarioContext = scenarioContext;
             this._driver = wrapper.Driver;
+            _specFlowOutputHelper = specFlowOutputHelper;
         }
 
         [Given(@"I am on the login page")]
-        public void GivenIAmOnTheLoginPage()
+        public void GoToLoginPage()
         {
             //Instantiating navigation bar
             _navbar = new NavBar(_driver);
@@ -39,15 +42,15 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 
             //Dismissing button
             dismiss.ClickDismissButton();
-            Console.WriteLine("Successfully dismiss pop-up alert");
+            _specFlowOutputHelper.WriteLine("Successfully dismiss pop-up alert");
 
             // Go to my Account
             _navbar.GoToAccount();
-            Console.WriteLine("Successfully navigated to MyAccount Page");
+            _specFlowOutputHelper.WriteLine("Successfully navigated to MyAccount Page");
         }
 
         [Given(@"(?:I|i) have logged in using valid login credentials")]
-        public void GivenIHaveLoggedInUsingValidCredentials()
+        public void LoginToMyAccount()
         {
 
             _myAccount = new MyAccount(_driver);
@@ -57,7 +60,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             if (username == null)
             {
                 username = "hellogen@edgewords.co.uk";
-                Console.WriteLine("USERNAME env not set: Setting username ...");
+                _specFlowOutputHelper.WriteLine("USERNAME env not set: Setting username ...");
             }
 
             //retrieves the password environment varibale set in .runsettings
@@ -66,22 +69,14 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             if (password == null)
             {
                 password = "HelloEdgewords!23";
-                Console.WriteLine("Password env not set: Setting password ...");
+                _specFlowOutputHelper.WriteLine("Password env not set: Setting password ...");
             }
 
             //Checks if you have successully logged in
             bool loggedIn = _myAccount.LoginExpectSuccess(username, password);
             Assert.That(loggedIn, Is.True, "We did not login");
-            Console.WriteLine("Successfully logged in");
+            _specFlowOutputHelper.WriteLine("Successfully logged in");
             
-        }
-
-        [Given(@"I navigate to the Shop page")]
-        public void WhenINavigateToTheShopPage()
-        {
-            //Go To Shop
-            _navbar.GoToShop();
-            Console.WriteLine("Successfully navigated to shop page");
         }
 
     }

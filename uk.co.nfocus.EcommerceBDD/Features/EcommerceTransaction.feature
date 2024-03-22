@@ -3,16 +3,15 @@ In order to enhance customer experience when purchasing an Item online
 the CEO of the clothing website
 wants to provide an order functionality 
 
-OT
+
 
 Background: 
 	Given I am on the login page
 		And I have logged in using valid login credentials
-		And I navigate to the Shop page
 	
 @TestCaseOne
 Scenario Outline: Applying a coupon
-	When I add '<item>' to my cart
+	When I navigate to the Shop page to add '<item>' to my cart
 		And I view cart to apply coupon '<coupon>'
 	Then I should get '<discount>'% off my selected item
 
@@ -24,7 +23,7 @@ Examples:
 
 @TestCaseTwo
 Scenario Outline: Placing an order
-	When I add '<item>' to my cart
+	When I navigate to the Shop page to add '<item>' to my cart
 		And I fill the billing details to place an order in checkout 
 		| firstName | secondName |        country      |     address    |  city  | postcode |    phoneNo   | 
 		|   Jane    |     Doe    | United Kingdom (UK) | 149 Piccadilly | London | W1J 7NT  | 01632 907767 |

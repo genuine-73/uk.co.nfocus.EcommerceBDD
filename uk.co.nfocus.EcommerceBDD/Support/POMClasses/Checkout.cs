@@ -160,7 +160,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             try
             {
-               _cashOnDelivery.Click();
+               _checkPayments.Click();
             }
             catch
             {
