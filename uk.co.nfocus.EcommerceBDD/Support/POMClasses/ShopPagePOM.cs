@@ -9,6 +9,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
 {
     internal class ShopPagePOM
     {
+        //variable declaration
         private IWebDriver _driver;
         private string _item;
         public ShopPagePOM(IWebDriver driver)
@@ -46,6 +47,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             _viewCart.Click();
         }
 
+        //Checks 'view cart' button appears
         public bool CheckViewCart()
         {
             return _viewCart.Displayed;

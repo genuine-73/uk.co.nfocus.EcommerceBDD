@@ -11,6 +11,9 @@ Background:
 	
 @TestCaseOne
 Scenario Outline: Applying a coupon
+The test will login to an e-commerce site as a registered user, purchase an item of clothing, apply a 
+discount code and check that the total is correct after the discount & shipping is applied.
+
 	When I navigate to the Shop page to add '<item>' to my cart
 		And I view cart to apply coupon '<coupon>'
 	Then I should get '<discount>'% off my selected item
@@ -23,12 +26,16 @@ Examples:
 
 @TestCaseTwo
 Scenario Outline: Placing an order
+The test will login to an e-commerce site as a registered user, purchase an item of clothing and go 
+through checkout. It will capture the order number and check the order is also present in the ‘My 
+Orders’ section of the site
+
 	When I navigate to the Shop page to add '<item>' to my cart
 		And I fill the billing details to place an order in checkout 
-		| firstName | secondName |        country      |     address    |  city  | postcode |    phoneNo   | 
-		|   Jane    |     Doe    | United Kingdom (UK) | 149 Piccadilly | London | W1J 7NT  | 01632 907767 |
-	Then I should see an order summary of my latest order with the order number
-		And see the same order number when I navigate to my orders tab in my account
+		| firstName | secondName | country             | address        | city   | postcode | phoneNo      | email					  |
+		| Jane      | Doe        | United Kingdom (UK) | 149 Piccadilly | London | W1J 7NT  | 01632 907767 | hellogen@edgewords.co.uk |
+	Then I should see an order summary of my latest order
+		And View the order I made in my orders tab in my account
 
 Examples: 
 | item |

@@ -33,11 +33,12 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _couponCode => StaticWaitForElement(_driver, By.Id("coupon_code")); // Finds the field to enter coupon code
         private IWebElement _applyButton => StaticWaitForElement( _driver, By.Name("apply_coupon")); //Finds the apply coupon button 
         private IWebElement _removeCoupon => StaticWaitForElement(_driver, By.LinkText("[Remove]")); //Finds the [Remove] link to clear coupon 
-        private IWebElement _subtotal => StaticWaitForElement(_driver, By.CssSelector("td.product-subtotal > span:nth-child(1) > bdi:nth-child(1)")); // Cost of the clothing item
+        private IWebElement _subtotal => StaticWaitForElement(_driver, By.CssSelector(".cart-subtotal > td:nth-child(2) > span:nth-child(1)")); // Cost of the clothing item
         private IWebElement _discount => StaticWaitForElement(_driver, By.CssSelector(".cart-discount > td:nth-child(2) > span:nth-child(1)")); // Cost of Discount
         private IWebElement _shippingCost => StaticWaitForElement(_driver, By.CssSelector("#shipping_method > li > label > span")); // Shipping cost
-        private IWebElement _total => StaticWaitForElement(_driver, By.CssSelector(".order-total > td:nth-child(2)")); // The total cost of price + shipping
+        private IWebElement _total => StaticWaitForElement(_driver, By.CssSelector(".order-total > td:nth-child(2) > strong:nth-child(1) > span:nth-child(1)")); // The total cost of price + shipping
         private IWebElement _returnToShop => WaitForElement(_driver, By.LinkText("Return to shop"));
+        private IWebElement _alertBanner => StaticWaitForElement(_driver, By.CssSelector(".woocommerce-notices-wrapper"));
                     
         //getters and setters for various fields such as: coupons, price, discount etc.  
         public string Coupon
@@ -101,7 +102,15 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         public void RemoveCoupon()
         {
             ScrollElementIntoView(_driver, _removeCoupon);
-            _removeCoupon.Click();
+            try
+            {
+                _removeCoupon.Click();
+            }
+            catch(TimeoutException)
+            {
+                Console.WriteLine("Applied discount cannot be found");
+            }
+            
         }
 
         //Deletes all item from cart
@@ -128,8 +137,36 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
                 RemoveCoupon();
                 DeleteItemsFromCart();
             }
-            //ReturnToShop();
             
         }
+
+
+        //Testing new characteristics
+        public string? RemoveCouponSuccess()
+        {
+            _removeCoupon.Click();
+            try
+            {
+                return _alertBanner.Text;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public bool RemoveItemSuccess()
+        {
+            try
+            {
+                return _returnToShop.Displayed;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
     }
 }

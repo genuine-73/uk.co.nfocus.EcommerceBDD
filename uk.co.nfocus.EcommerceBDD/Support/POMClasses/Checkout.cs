@@ -22,15 +22,8 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         public Checkout(IWebDriver driver)
         {
             _driver = driver;
-            try
-            {
-                Assert.That(_driver.Url, Is.EqualTo("https://www.edgewordstraining.co.uk/demo-site/checkout/"));
-            }
-            catch
-            {
-                TakeFullPageScreenshot(_driver, "Wrong_URL");
-                Console.WriteLine("Cannot proceed to checkout because cart is empty");
-            }
+            Assert.That(_driver.Url, Is.EqualTo("https://www.edgewordstraining.co.uk/demo-site/checkout/"));
+            
         }
 
         // Locators for finding Elements to fill out the Billing information
@@ -42,8 +35,9 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _phoneNo => StaticWaitForElement(_driver, By.Id("billing_phone"));
         private IWebElement _placeOrder => StaticWaitForElement(_driver, By.Id("place_order"));
         private IWebElement _country => StaticWaitForElement(_driver, By.Id("select2-billing_country-container"));
+
+        private IWebElement _email => StaticWaitForElement(_driver, By.Id("billing_email"));
         private IWebElement _checkPayments => WaitForElement(_driver, By.CssSelector("li.wc_payment_method.payment_method_cheque"));
-        private IWebElement _cashOnDelivery => WaitForElement(_driver, By.CssSelector("li.wc_payment_method.payment_method_cod"));
         //Service Methods
         //Getters and Setters for all of the billing details fields
         public string FirstName
@@ -122,6 +116,19 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             {
                 _phoneNo.Clear();
                 _phoneNo.SendKeys(value);
+            }
+        }
+
+        public string Email
+        {
+            get
+            {
+                return _email.GetAttribute("value");
+            }
+            set
+            {
+                _email.Clear();
+                _email.SendKeys(value);
             }
         }
 

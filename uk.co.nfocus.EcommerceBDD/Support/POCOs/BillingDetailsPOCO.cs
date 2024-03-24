@@ -15,5 +15,6 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POCOs
         public string Postcode { get; set; }
         public string PhoneNo { get; set; }
         public string Country { get; set; }
+        public string Email { get; set; }
     }
 }

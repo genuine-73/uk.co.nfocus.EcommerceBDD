@@ -15,62 +15,11 @@ using static uk.co.nfocus.EcommerceBDD.Support.StaticHelperLib;
 
 //TODO:
 /*
-- Double check and rewrite my scenarios
-- Currently clean up is in the applying coupon step definition
-- Improve on WaitForElement as well as DeleteFromCart, CheckPayments etc in Static Helper Library. Utilise Scroll Element into View
-- Add enums for payment methods
-- Rewrite some of the method names
-- Add in the outerhelp so I can write out the reporting in HTML form
-- Look for ways to decouple code
+- Double check scenarios
 - Cart Cleanup -> think of if there is no coupon, Items in cart etc. best to seperate them out!  
-- Add Item to cart from ShopPOM make it better
-
- Teardown
-
-Your TearDown clean up is *very* specific to the two tests. I.e. if you don’t end up on the cart page then no attempt is made to clear the cart. Both tests should log out at the end, and you’ve repeated that code. Why not just have the teardown clear the cart and log out for both tests?
-
-Put the whole thing in a try/catch/finally with finally containing driver.Quit(); -this way the browser will always be quit even if something should go wrong with the cleanup.
- 
-
-Line 54 (as part of an assertion try/catch, you create a variable ‘e’ that holds the caught exception details but ‘e’ is never used afterwards. Either remove this unused variable or output it in the catch. Also, rather than catching the general Exception, consider catching the more specific AssertionException
-
-
-ThenAccessItFromMyOrdersPortal()    
-
-The final assert and try/catch has a few issues:              +
-
-If the assertion fails the following console.writeline will not execute so the message will not be logged. Use the third parameter of Assert.That() to write out fail messages:
-                
-Assert.That(viewOrder.Substring(1, viewOrder.Length - 1), Is.EqualTo(orderNo), $"The order number from Checkout Page: {orderNo}, The order number from MyAccount->Orders: {viewOrder}");
-
- 
-
-As this is the last assert of the test if it fails, rethrow the assertion in the catch block.:
-            catch (Exception)
-
-            {
-
-                //Takes a screenshot if Test fails
-
-                TakeFullPageScreenshot(_driver, "Incorrect", "TestCaseTwo");
-
-                Console.WriteLine("Successfully saves a screenshot if something goes wrong");
-
-                throw;
-
-            }
-
- 
-
-By doing this the test will definitely report a fail. If you are using Specflow LivingDoc for reporting, catching all failed AssertionExceptions will result in a test reporting a pass.
-
-  
 
 Further to this and more generally with try/catch and assertions – if you are always catching assertion errors and allowing the test to continue you can waste time. Try adding a non existent item to the cart (e.g. ‘Boo’) then place an order. Your test attempts to run far further than it can – it will e.g. navigate to the cart. When the requested item isn’t found execution should stop there for that test, and move on to the next.
 
- 
-
-Also general feedback – run through your code base and try and fix any compiler warnings (green underlines).
 */
 
 namespace uk.co.nfocus.EcommerceBDD.Support
@@ -161,6 +110,12 @@ namespace uk.co.nfocus.EcommerceBDD.Support
                 //Clean up process. Getting rid of the coupon and all of the items from the cart      
                 _cart = new Cart(_driver);
                 _cart.CartCleanUp();
+                //string removeCoupon = _cart.RemoveCouponSuccess();
+                //Assert.That(removeCoupon, Does.Contain("removed"));
+
+                //_cart.DeleteItemsFromCart();
+                //bool itemsDeleted = _cart.RemoveItemSuccess();
+                //Assert.That(itemsDeleted, Is.EqualTo(true));
                 Console.WriteLine("Successfully removed the coupon and deleted items from the cart");
             }
             catch

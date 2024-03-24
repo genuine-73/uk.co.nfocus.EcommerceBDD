@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uk.co.nfocus.EcommerceBDD", "uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD.csproj", "{CD7176A4-714F-4A1B-A606-04F225DE512D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uk.co.nfocus.EcommerceBDD", "uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD.csproj", "{CD7176A4-714F-4A1B-A606-04F225DE512D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B613A9AD-0100-4E1D-BCD5-1F7C723C7959}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

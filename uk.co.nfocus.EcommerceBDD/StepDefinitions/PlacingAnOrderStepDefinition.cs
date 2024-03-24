@@ -54,6 +54,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _checkout.City = _billingDetailsPOCO.City;
             _checkout.Postcode = _billingDetailsPOCO.Postcode;
             _checkout.PhoneNo= _billingDetailsPOCO.PhoneNo;
+            _checkout.Email = _billingDetailsPOCO.Email;
 
             Assert.Multiple(() =>
             {
@@ -68,7 +69,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _specFlowOutputHelper.WriteLine("Successfully filled out billing details");
         }
 
-        [Then(@"I should see an order summary of my latest order with the order number")]
+        [Then(@"I should see an order summary of my latest order")]
         
         public void TakeToOrderSummary()
         {
@@ -91,7 +92,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _scenarioContext["_orderNo"] = orderNo; //Allows to share objects between sets  
         }
           
-        [Then(@"see the same order number when I navigate to my orders tab in my account")]
+        [Then(@"View the order I made in my orders tab in my account")]
         public void CheckOrderNumberMatches()
         {
             //Navigates to MyAccount Page
@@ -113,13 +114,15 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             try
             {
                 Assert.That(viewOrder.Substring(1, viewOrder.Length - 1), Is.EqualTo(orderNo), $"The order number from Checkout Page: {orderNo}, The order number from MyAccount->Orders: {viewOrder}");
-                _specFlowOutputHelper.WriteLine($"The order number from Checkout Page: {orderNo} matches The order number from MyAccount->Orders: {viewOrder}");
+                _specFlowOutputHelper.WriteLine($"Passed: The order number from Checkout Page: {orderNo} matches MyAccount->Orders: {viewOrder}");
             }
             catch (Exception)
             {
                 //Takes a screenshot if Test fails
                 TakeFullPageScreenshot(_driver, "Incorrect", "TestCaseTwo");
-                _specFlowOutputHelper.WriteLine("Takes screenshot to mark the order number from account does not match the order number from summary");
+                _specFlowOutputHelper.WriteLine("Takes screenshot to to show Order has not been made properly");
+                throw;
+            
             }
         }
     }

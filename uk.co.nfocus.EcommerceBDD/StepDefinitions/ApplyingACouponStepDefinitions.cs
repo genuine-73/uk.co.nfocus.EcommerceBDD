@@ -11,6 +11,7 @@ using static uk.co.nfocus.EcommerceBDD.Support.StaticHelperLib;
 using uk.co.nfocus.EcommerceBDD.Support.POMClasses;
 using TechTalk.SpecFlow.CommonModels;
 using TechTalk.SpecFlow.Infrastructure;
+using NUnit.Framework.Internal;
 
 namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 {
@@ -20,7 +21,6 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         private readonly ScenarioContext _scenarioContext;
         private IWebDriver _driver;
         private Cart _cart;
-        private NavBar _navbar;
         private ShopPagePOM _shop;
         private string _item;
         private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
@@ -33,7 +33,7 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 
 
 
-        [When(@"(?:I|i) view cart to apply coupon '(.*)'")]
+        [When(@"I view cart to apply coupon '(.*)'")]
         public void EnterCouponCode(string coupon)
         {
             //unwrapping values
@@ -51,35 +51,33 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         }
 
         [Then(@"I should get '(.*)'% off my selected item")]
-        public void CheckDiscountsApplied(string discount)
+        public void CheckDiscountsApplied(decimal discount)
         {
 
-            //Test to see if discount works                           
+                         
             try
             {
-                decimal newDiscount = ConvertToDecimal(discount);
-                decimal calculateDiscount = CalculateDiscount(newDiscount, _cart.SubTotal);
-                
+                // Test to see if discount works
+                decimal calculateDiscount = CalculateDiscount(discount, _cart.SubTotal);
                 Assert.That(_cart.Discount, Is.EqualTo(calculateDiscount), $"Wrong Discount value. Expected: {calculateDiscount} but was {_cart.Discount}");
                 _specFlowOutputHelper.WriteLine("The discount applied is correct!");
                 
             }      
-            catch (Exception e)
+            catch (Exception)
             {
                 // Take Screenshot if an exception's occurs when discount is wrong
                 TakeFullPageScreenshot(_driver, "DiscountError", "TestCaseOne");                               
                 _specFlowOutputHelper.WriteLine("Taking a screenshot to show the point of failure when calculating the discount applied");
             }
 
-            //Tests if the total calculated is correct  
+            
             try
             {
+                //Tests if the total calculated is correct  
                 decimal total = _cart.SubTotal - _cart.Discount + _cart.ShippingCost;
-                Assert.That(_cart.Total, Is.EqualTo(total), $"Total calculated is incorrect. Expected: {total} but was {_cart.Discount}");
+                Assert.That(_cart.Total, Is.EqualTo(total), $"Total calculated is incorrect. Expected: {total} but was {_cart.Total}");
                 _specFlowOutputHelper.WriteLine("The total is correct!");
                 
-                // Take Screenshot of Cart Page
-                TakeFullPageScreenshot(_driver, "Total_Applied_Correctly", "TestCaseOne");
             }
             catch (Exception)
             {

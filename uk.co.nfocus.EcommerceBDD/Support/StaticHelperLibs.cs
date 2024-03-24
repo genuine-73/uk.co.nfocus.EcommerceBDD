@@ -21,24 +21,28 @@ namespace uk.co.nfocus.EcommerceBDD.Support
 
 
         //Helper method to wait for element to load.
-        public static IWebElement StaticWaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5) 
+        public static IWebElement? StaticWaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5) 
         {
             WebDriverWait myWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-            return myWait.Until(drv =>
+            By blockUI = By.CssSelector(".blockUI.blockOverlay");
+            myWait.Until(ExpectedConditions.InvisibilityOfElementLocated(blockUI));
+            IWebElement element = myWait.Until(drv => drv.FindElement(locator));
+
+            try
             {
-                IWebElement element = drv.FindElement(locator);
-                if (element.Enabled)
+                return myWait.Until(drv =>
                 {
+                    IWebElement element = drv.FindElement(locator);
                     return element;
-                }
-                else
-                {
-                    return null;
-                }   
-            });
+                });
+            }
+            catch
+            {
+                return null;
+            }
         }
 
-        public static IWebElement WaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5)
+        public static IWebElement? WaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5)
         {
             try
             {
@@ -53,10 +57,10 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             }
         }
 
-        public static void TakeFullPageScreenshot(IWebDriver driver, string filename, string subfolderName = null)
+        public static void TakeFullPageScreenshot(IWebDriver driver, string filename, string? subfolderName = null)
         {
             //Stores the current time stamp of test
-            string dateTime = (DateTime.UtcNow).ToString("dd-MMM-yyyy_HH-mm-ss");
+            string dateTime = DateTime.UtcNow.ToString("dd-MMM-yyyy_HH-mm-ss");
             string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string filepath = path + $"\\Screenshot\\{subfolderName}\\{filename}_{dateTime}.png";
 

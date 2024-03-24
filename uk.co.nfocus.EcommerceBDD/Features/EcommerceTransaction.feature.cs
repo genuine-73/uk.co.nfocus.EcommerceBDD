@@ -104,7 +104,9 @@ namespace uk.co.nfocus.EcommerceBDD.Features
             argumentsOfScenario.Add("item", item);
             argumentsOfScenario.Add("coupon", coupon);
             argumentsOfScenario.Add("discount", discount);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Applying a coupon", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Applying a coupon", "The test will login to an e-commerce site as a registered user, purchase an item " +
+                    "of clothing, apply a \r\ndiscount code and check that the total is correct after t" +
+                    "he discount & shipping is applied.", tagsOfScenario, argumentsOfScenario, featureTags);
 #line 13
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -118,13 +120,13 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
 this.FeatureBackground();
 #line hidden
-#line 14
+#line 17
  testRunner.When(string.Format("I navigate to the Shop page to add \'{0}\' to my cart", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 15
+#line 18
   testRunner.And(string.Format("I view cart to apply coupon \'{0}\'", coupon), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 16
+#line 19
  testRunner.Then(string.Format("I should get \'{0}\'% off my selected item", discount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -146,8 +148,10 @@ this.FeatureBackground();
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("item", item);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Placing an order", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 25
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Placing an order", "The test will login to an e-commerce site as a registered user, purchase an item " +
+                    "of clothing and go \r\nthrough checkout. It will capture the order number and chec" +
+                    "k the order is also present in the ‘My \r\nOrders’ section of the site", tagsOfScenario, argumentsOfScenario, featureTags);
+#line 28
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -160,7 +164,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
 this.FeatureBackground();
 #line hidden
-#line 26
+#line 33
  testRunner.When(string.Format("I navigate to the Shop page to add \'{0}\' to my cart", item), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -170,7 +174,8 @@ this.FeatureBackground();
                             "address",
                             "city",
                             "postcode",
-                            "phoneNo"});
+                            "phoneNo",
+                            "email"});
                 table1.AddRow(new string[] {
                             "Jane",
                             "Doe",
@@ -178,15 +183,16 @@ this.FeatureBackground();
                             "149 Piccadilly",
                             "London",
                             "W1J 7NT",
-                            "01632 907767"});
-#line 27
+                            "01632 907767",
+                            "hellogen@edgewords.co.uk"});
+#line 34
   testRunner.And("I fill the billing details to place an order in checkout", ((string)(null)), table1, "And ");
 #line hidden
-#line 30
- testRunner.Then("I should see an order summary of my latest order with the order number", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 37
+ testRunner.Then("I should see an order summary of my latest order", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 31
-  testRunner.And("see the same order number when I navigate to my orders tab in my account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 38
+  testRunner.And("View the order I made in my orders tab in my account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
