@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="d084701b-9984-467a-9cc7-ca27e73f55ad" name="GenuineMathew@DESKTOP-MOLHKHA 2024-03-25 14:09:39" runUser="AzureAD\GenuineMathew" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2024-03-25T14:09:39.2998173+00:00" queuing="2024-03-25T14:09:39.2998179+00:00" start="2024-03-25T14:09:22.9175901+00:00" finish="2024-03-25T14:10:10.6768034+00:00" />
+  <TestSettings name="default" id="f63d2221-a906-42a1-90e8-fc4f75e5079e">
+    <Deployment runDeploymentRoot="GenuineMathew_DESKTOP-MOLHKHA_2024-03-25_14_09_39" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="05a37aa3-32e0-42c8-b6ac-98a9b32f5fd7" testId="9a5401bc-75c2-5b26-fa5f-ee792a38681e" testName="ApplyingACoupon(&quot;Belt&quot;,&quot;edgewords&quot;,&quot;15&quot;,null)" computerName="DESKTOP-MOLHKHA" duration="00:00:15.5227640" startTime="2024-03-25T14:09:23.7358270+00:00" endTime="2024-03-25T14:09:39.2585358+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="05a37aa3-32e0-42c8-b6ac-98a9b32f5fd7">
+      <Output>
+        <StdOut>BROWSER env not set: Setting to Edge&#xD;
+Browser set to edge&#xD;
+URL has not been properly set &#xD;
+ default string has been passed to the URL&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+-&gt; Successfully dismiss pop-up alert&#xD;
+-&gt; Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GoToLoginPage() (0.7s)&#xD;
+And I have logged in using valid login credentials&#xD;
+-&gt; USERNAME env not set: Setting username ...&#xD;
+-&gt; Password env not set: Setting password ...&#xD;
+-&gt; Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.LoginToMyAccount() (1.3s)&#xD;
+When I navigate to the Shop page to add 'Belt' to my cart&#xD;
+-&gt; Successfully navigated to shop page&#xD;
+-&gt; Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.AddItemToCart("Belt") (1.2s)&#xD;
+And I view cart to apply coupon 'edgewords'&#xD;
+-&gt; Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.EnterCouponCode("edgewords") (0.7s)&#xD;
+Then I should get 15% deducted off my selected item&#xD;
+-&gt; The discount applied is correct!&#xD;
+-&gt; The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.CheckDiscountsApplied(15) (1.2s)&#xD;
+Successfully removed the coupon and deleted items from the cart&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="772fb31d-cd2d-45b2-89d8-0dc69ffca756" testId="871c517d-50a5-a9b0-fadd-f258a62b2a72" testName="ApplyingACoupon(&quot;Beanie&quot;,&quot;nfocus&quot;,&quot;25&quot;,null)" computerName="DESKTOP-MOLHKHA" duration="00:00:14.6578970" startTime="2024-03-25T14:09:39.2597697+00:00" endTime="2024-03-25T14:09:53.9176666+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="772fb31d-cd2d-45b2-89d8-0dc69ffca756">
+      <Output>
+        <StdOut>BROWSER env not set: Setting to Edge&#xD;
+Browser set to edge&#xD;
+URL has not been properly set &#xD;
+ default string has been passed to the URL&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+-&gt; Successfully dismiss pop-up alert&#xD;
+-&gt; Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GoToLoginPage() (0.8s)&#xD;
+And I have logged in using valid login credentials&#xD;
+-&gt; USERNAME env not set: Setting username ...&#xD;
+-&gt; Password env not set: Setting password ...&#xD;
+-&gt; Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.LoginToMyAccount() (1.2s)&#xD;
+When I navigate to the Shop page to add 'Beanie' to my cart&#xD;
+-&gt; Successfully navigated to shop page&#xD;
+-&gt; Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.AddItemToCart("Beanie") (1.4s)&#xD;
+And I view cart to apply coupon 'nfocus'&#xD;
+-&gt; Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.EnterCouponCode("nfocus") (0.7s)&#xD;
+Then I should get 25% deducted off my selected item&#xD;
+-&gt; The discount applied is correct!&#xD;
+-&gt; The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.CheckDiscountsApplied(25) (1.2s)&#xD;
+Successfully removed the coupon and deleted items from the cart</StdOut>
+        <ErrorInfo>
+          <Message>TearDown : OpenQA.Selenium.ElementClickInterceptedException : element click intercepted: Element &lt;a href="https://www.edgewordstraining.co.uk/demo-site/my-account/"&gt;...&lt;/a&gt; is not clickable at point (549, 38). Other element would receive the click: &lt;h1 class="entry-title"&gt;...&lt;/h1&gt;&#xD;
+  (Session info: MicrosoftEdge=122.0.2365.80)</Message>
+          <StackTrace>--TearDown&#xD;
+   at OpenQA.Selenium.WebDriver.UnpackAndThrowOnError(Response errorResponse, String commandToExecute)&#xD;
+   at OpenQA.Selenium.WebDriver.Execute(String driverCommandToExecute, Dictionary`2 parameters)&#xD;
+   at OpenQA.Selenium.WebElement.Click()&#xD;
+   at uk.co.nfocus.EcommerceBDD.Support.POMClasses.NavBar.GoToAccount() in C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\Support\POMClasses\NavBar.cs:line 36&#xD;
+   at uk.co.nfocus.EcommerceBDD.Support.Hooks.TearDown() in C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\Support\Hooks.cs:line 119&#xD;
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.FireEvents(HookType hookType)&#xD;
+   at TechTalk.SpecFlow.Infrastructure.TestExecutionEngine.OnScenarioEnd()&#xD;
+   at TechTalk.SpecFlow.TestRunner.OnScenarioEnd()&#xD;
+   at uk.co.nfocus.EcommerceBDD.Features.EcommerceTransactionFeature.TestTearDown()
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e4ed5ed5-cc7a-4cf7-8703-70dd46f5206b" testId="ec11e9db-e948-e8d3-6abf-0157c58f1edb" testName="PlacingAnOrder(&quot;Belt&quot;,null)" computerName="DESKTOP-MOLHKHA" duration="00:00:16.6559269" startTime="2024-03-25T14:09:53.9190502+00:00" endTime="2024-03-25T14:10:10.5749764+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e4ed5ed5-cc7a-4cf7-8703-70dd46f5206b">
+      <Output>
+        <StdOut>BROWSER env not set: Setting to Edge&#xD;
+Browser set to edge&#xD;
+URL has not been properly set &#xD;
+ default string has been passed to the URL&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+-&gt; Successfully dismiss pop-up alert&#xD;
+-&gt; Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GoToLoginPage() (0.9s)&#xD;
+And I have logged in using valid login credentials&#xD;
+-&gt; USERNAME env not set: Setting username ...&#xD;
+-&gt; Password env not set: Setting password ...&#xD;
+-&gt; Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.LoginToMyAccount() (1.3s)&#xD;
+When I navigate to the Shop page to add 'Belt' to my cart&#xD;
+-&gt; Successfully navigated to shop page&#xD;
+-&gt; Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.AddItemToCart("Belt") (1.2s)&#xD;
+And I fill the billing details to place an order in checkout&#xD;
+  --- table step argument ---&#xD;
+  | firstName | secondName | country             | address        | city   | postcode | phoneNo      | email                    |&#xD;
+  | Jane      | Doe        | United Kingdom (UK) | 149 Piccadilly | London | W1J 7NT  | 01632 907767 | hellogen@edgewords.co.uk |&#xD;
+-&gt; Successfully navigated to the checkout Page&#xD;
+-&gt; Successfully filled out billing details&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.FillOutBillingDetails(&lt;table&gt;) (2.2s)&#xD;
+Then I should see an order summary of my latest order&#xD;
+-&gt; Successfully Checked Payments Radio Button&#xD;
+-&gt; Successfully placed on order&#xD;
+-&gt; The most recent order you have made is 11987&#xD;
+-&gt; Successfully retrieved the order number&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.TakeToOrderSummary() (2.2s)&#xD;
+And View the order I made in my orders tab in my account&#xD;
+-&gt; Successfully back to account after placing an order&#xD;
+-&gt; Checking orders page in my accounts&#xD;
+-&gt; Successfully grabs the order number from the latest order in Orders Page &gt; My Account&#xD;
+-&gt; Passed: The order number from Checkout Page: 11987 matches MyAccount-&gt;Orders: #11987&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.CheckOrderNumberMatches() (1.2s)&#xD;
+Successfully removed the coupon and deleted items from the cart&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser</StdOut>
+      </Output>
+      <ResultFiles>
+        <ResultFile path="DESKTOP-MOLHKHA\Order_Summary_25-Mar-2024_14-10-05.png" />
+      </ResultFiles>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="PlacingAnOrder(&quot;Belt&quot;,null)" storage="c:\users\genuinemathew\source\repos\uk.co.nfocus.ecommercebdd\uk.co.nfocus.ecommercebdd\bin\debug\net6.0\uk.co.nfocus.ecommercebdd.dll" id="ec11e9db-e948-e8d3-6abf-0157c58f1edb">
+      <Execution id="e4ed5ed5-cc7a-4cf7-8703-70dd46f5206b" />
+      <TestMethod codeBase="C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\bin\Debug\net6.0\uk.co.nfocus.EcommerceBDD.dll" adapterTypeName="executor://nunit3testexecutor/" className="uk.co.nfocus.EcommerceBDD.Features.EcommerceTransactionFeature" name="PlacingAnOrder(&quot;Belt&quot;,null)" />
+    </UnitTest>
+    <UnitTest name="ApplyingACoupon(&quot;Belt&quot;,&quot;edgewords&quot;,&quot;15&quot;,null)" storage="c:\users\genuinemathew\source\repos\uk.co.nfocus.ecommercebdd\uk.co.nfocus.ecommercebdd\bin\debug\net6.0\uk.co.nfocus.ecommercebdd.dll" id="9a5401bc-75c2-5b26-fa5f-ee792a38681e">
+      <Execution id="05a37aa3-32e0-42c8-b6ac-98a9b32f5fd7" />
+      <TestMethod codeBase="C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\bin\Debug\net6.0\uk.co.nfocus.EcommerceBDD.dll" adapterTypeName="executor://nunit3testexecutor/" className="uk.co.nfocus.EcommerceBDD.Features.EcommerceTransactionFeature" name="ApplyingACoupon(&quot;Belt&quot;,&quot;edgewords&quot;,&quot;15&quot;,null)" />
+    </UnitTest>
+    <UnitTest name="ApplyingACoupon(&quot;Beanie&quot;,&quot;nfocus&quot;,&quot;25&quot;,null)" storage="c:\users\genuinemathew\source\repos\uk.co.nfocus.ecommercebdd\uk.co.nfocus.ecommercebdd\bin\debug\net6.0\uk.co.nfocus.ecommercebdd.dll" id="871c517d-50a5-a9b0-fadd-f258a62b2a72">
+      <Execution id="772fb31d-cd2d-45b2-89d8-0dc69ffca756" />
+      <TestMethod codeBase="C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\bin\Debug\net6.0\uk.co.nfocus.EcommerceBDD.dll" adapterTypeName="executor://nunit3testexecutor/" className="uk.co.nfocus.EcommerceBDD.Features.EcommerceTransactionFeature" name="ApplyingACoupon(&quot;Beanie&quot;,&quot;nfocus&quot;,&quot;25&quot;,null)" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="9a5401bc-75c2-5b26-fa5f-ee792a38681e" executionId="05a37aa3-32e0-42c8-b6ac-98a9b32f5fd7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="871c517d-50a5-a9b0-fadd-f258a62b2a72" executionId="772fb31d-cd2d-45b2-89d8-0dc69ffca756" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ec11e9db-e948-e8d3-6abf-0157c58f1edb" executionId="e4ed5ed5-cc7a-4cf7-8703-70dd46f5206b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="3" executed="3" passed="2" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.5.0.0: Test execution started&#xD;
+Running all tests in C:\Users\GenuineMathew\source\repos\uk.co.nfocus.EcommerceBDD\uk.co.nfocus.EcommerceBDD\bin\Debug\net6.0\uk.co.nfocus.EcommerceBDD.dll&#xD;
+   NUnit3TestExecutor discovered 3 of 3 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+NUnit Adapter 4.5.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="DESKTOP-MOLHKHA" outcome="Warning" timestamp="2024-03-25T14:09:39.2727115+00:00">
+        <Text>BROWSER env not set: Setting to Edge&#xD;
+Browser set to edge&#xD;
+URL has not been properly set &#xD;
+ default string has been passed to the URL&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+-&gt; Successfully dismiss pop-up alert&#xD;
+-&gt; Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GoToLoginPage() (0.7s)&#xD;
+And I have logged in using valid login credentials&#xD;
+-&gt; USERNAME env not set: Setting username ...&#xD;
+-&gt; Password env not set: Setting password ...&#xD;
+-&gt; Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.LoginToMyAccount() (1.3s)&#xD;
+When I navigate to the Shop page to add 'Belt' to my cart&#xD;
+-&gt; Successfully navigated to shop page&#xD;
+-&gt; Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.AddItemToCart("Belt") (1.2s)&#xD;
+And I view cart to apply coupon 'edgewords'&#xD;
+-&gt; Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.EnterCouponCode("edgewords") (0.7s)&#xD;
+Then I should get 15% deducted off my selected item&#xD;
+-&gt; The discount applied is correct!&#xD;
+-&gt; The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.CheckDiscountsApplied(15) (1.2s)&#xD;
+Successfully removed the coupon and deleted items from the cart&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser&#xD;
+</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-MOLHKHA" outcome="Warning" timestamp="2024-03-25T14:09:53.9193229+00:00">
+        <Text>BROWSER env not set: Setting to Edge&#xD;
+Browser set to edge&#xD;
+URL has not been properly set &#xD;
+ default string has been passed to the URL&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+-&gt; Successfully dismiss pop-up alert&#xD;
+-&gt; Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GoToLoginPage() (0.8s)&#xD;
+And I have logged in using valid login credentials&#xD;
+-&gt; USERNAME env not set: Setting username ...&#xD;
+-&gt; Password env not set: Setting password ...&#xD;
+-&gt; Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.LoginToMyAccount() (1.2s)&#xD;
+When I navigate to the Shop page to add 'Beanie' to my cart&#xD;
+-&gt; Successfully navigated to shop page&#xD;
+-&gt; Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.AddItemToCart("Beanie") (1.4s)&#xD;
+And I view cart to apply coupon 'nfocus'&#xD;
+-&gt; Successfully applied coupon code&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.EnterCouponCode("nfocus") (0.7s)&#xD;
+Then I should get 25% deducted off my selected item&#xD;
+-&gt; The discount applied is correct!&#xD;
+-&gt; The total is correct!&#xD;
+-&gt; done: ApplyingACouponStepDefinitions.CheckDiscountsApplied(25) (1.2s)&#xD;
+Successfully removed the coupon and deleted items from the cart&#xD;
+</Text>
+      </RunInfo>
+      <RunInfo computerName="DESKTOP-MOLHKHA" outcome="Warning" timestamp="2024-03-25T14:10:10.5768928+00:00">
+        <Text>BROWSER env not set: Setting to Edge&#xD;
+Browser set to edge&#xD;
+URL has not been properly set &#xD;
+ default string has been passed to the URL&#xD;
+Successfully loads E-Commerce Page&#xD;
+Given I am on the login page&#xD;
+-&gt; Successfully dismiss pop-up alert&#xD;
+-&gt; Successfully navigated to MyAccount Page&#xD;
+-&gt; done: BackgroundStepDefinitions.GoToLoginPage() (0.9s)&#xD;
+And I have logged in using valid login credentials&#xD;
+-&gt; USERNAME env not set: Setting username ...&#xD;
+-&gt; Password env not set: Setting password ...&#xD;
+-&gt; Successfully logged in&#xD;
+-&gt; done: BackgroundStepDefinitions.LoginToMyAccount() (1.3s)&#xD;
+When I navigate to the Shop page to add 'Belt' to my cart&#xD;
+-&gt; Successfully navigated to shop page&#xD;
+-&gt; Successfully added an item to cart&#xD;
+-&gt; done: AddAnItemToCartStepDefinition.AddItemToCart("Belt") (1.2s)&#xD;
+And I fill the billing details to place an order in checkout&#xD;
+  --- table step argument ---&#xD;
+  | firstName | secondName | country             | address        | city   | postcode | phoneNo      | email                    |&#xD;
+  | Jane      | Doe        | United Kingdom (UK) | 149 Piccadilly | London | W1J 7NT  | 01632 907767 | hellogen@edgewords.co.uk |&#xD;
+-&gt; Successfully navigated to the checkout Page&#xD;
+-&gt; Successfully filled out billing details&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.FillOutBillingDetails(&lt;table&gt;) (2.2s)&#xD;
+Then I should see an order summary of my latest order&#xD;
+-&gt; Successfully Checked Payments Radio Button&#xD;
+-&gt; Successfully placed on order&#xD;
+-&gt; The most recent order you have made is 11987&#xD;
+-&gt; Successfully retrieved the order number&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.TakeToOrderSummary() (2.2s)&#xD;
+And View the order I made in my orders tab in my account&#xD;
+-&gt; Successfully back to account after placing an order&#xD;
+-&gt; Checking orders page in my accounts&#xD;
+-&gt; Successfully grabs the order number from the latest order in Orders Page &gt; My Account&#xD;
+-&gt; Passed: The order number from Checkout Page: 11987 matches MyAccount-&gt;Orders: #11987&#xD;
+-&gt; done: PlacingAnOrderStepDefinition.CheckOrderNumberMatches() (1.2s)&#xD;
+Successfully removed the coupon and deleted items from the cart&#xD;
+Successfully logsout of the account&#xD;
+Successfully closes down the browser&#xD;
+</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>

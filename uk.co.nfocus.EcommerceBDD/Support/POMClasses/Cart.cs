@@ -120,6 +120,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             {
                 try
                 {
+                    Thread.Sleep(1500);
                     _removeItem.Click();
                 }
                 catch
@@ -137,6 +138,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
                 RemoveCoupon();
                 DeleteItemsFromCart();
             }
+            ReturnToShop();
             
         }
     }
