@@ -29,7 +29,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         }
 
         //Locators for finding various elements on cart page
-        private IWebElement _removeItem => WaitForElement(_driver, By.LinkText("×")); //Finds the 'x' button the delete items from the cart
+        private IWebElement _removeItem => WaitForBlockUIToDisappear(_driver, By.LinkText("×")); //Finds the 'x' button the delete items from the cart
         private IWebElement _couponCode => StaticWaitForElement(_driver, By.Id("coupon_code")); // Finds the field to enter coupon code
         private IWebElement _applyButton => StaticWaitForElement( _driver, By.Name("apply_coupon")); //Finds the apply coupon button 
         private IWebElement _removeCoupon => StaticWaitForElement(_driver, By.LinkText("[Remove]")); //Finds the [Remove] link to clear coupon 
@@ -37,9 +37,8 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _discount => StaticWaitForElement(_driver, By.CssSelector(".cart-discount > td:nth-child(2) > span:nth-child(1)")); // Cost of Discount
         private IWebElement _shippingCost => StaticWaitForElement(_driver, By.CssSelector("#shipping_method > li > label > span")); // Shipping cost
         private IWebElement _total => StaticWaitForElement(_driver, By.CssSelector(".order-total > td:nth-child(2) > strong:nth-child(1) > span:nth-child(1)")); // The total cost of price + shipping
-        private IWebElement _returnToShop => WaitForElement(_driver, By.LinkText("Return to shop"));
-        private IWebElement _alertBanner => StaticWaitForElement(_driver, By.CssSelector(".woocommerce-notices-wrapper"));
-                    
+        private IWebElement _returnToShop => WaitForBlockUIToDisappear(_driver, By.LinkText("Return to shop"));      
+        
         //getters and setters for various fields such as: coupons, price, discount etc.  
         public string Coupon
         {
@@ -98,6 +97,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         {
             _returnToShop.Click();
         }
+
         //Removes applied coupon code
         public void RemoveCoupon()
         {

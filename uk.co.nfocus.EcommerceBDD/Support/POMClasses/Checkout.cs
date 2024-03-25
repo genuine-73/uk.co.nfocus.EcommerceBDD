@@ -37,7 +37,7 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
         private IWebElement _country => StaticWaitForElement(_driver, By.Id("select2-billing_country-container"));
 
         private IWebElement _email => StaticWaitForElement(_driver, By.Id("billing_email"));
-        private IWebElement _checkPayments => WaitForElement(_driver, By.CssSelector("li.wc_payment_method.payment_method_cheque"));
+        private IWebElement _checkPayments => WaitForBlockUIToDisappear(_driver, By.CssSelector("li.wc_payment_method.payment_method_cheque"));
         //Service Methods
         //Getters and Setters for all of the billing details fields
         public string FirstName

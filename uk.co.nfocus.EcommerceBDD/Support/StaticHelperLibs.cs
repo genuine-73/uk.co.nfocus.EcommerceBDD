@@ -21,29 +21,16 @@ namespace uk.co.nfocus.EcommerceBDD.Support
 
 
         //Helper method to wait for element to load.
-        public static IWebElement? StaticWaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5) 
+        public static IWebElement StaticWaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5) 
         {
             WebDriverWait myWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-            By blockUI = By.CssSelector(".blockUI.blockOverlay");
-            myWait.Until(ExpectedConditions.InvisibilityOfElementLocated(blockUI));
-            IWebElement element = myWait.Until(drv => drv.FindElement(locator));
-
-            try
-            {
-                return myWait.Until(drv =>
-                {
-                    IWebElement element = drv.FindElement(locator);
-                    return element;
-                });
-            }
-            catch
-            {
-                return null;
-            }
+            return myWait.Until(drv => drv.FindElement(locator));
         }
 
-        public static IWebElement? WaitForElement(IWebDriver driver, By locator, int timeoutInSeconds = 5)
+        //Helper method to wait for elements to be clickable when blockUI leaves
+        public static IWebElement? WaitForBlockUIToDisappear(IWebDriver driver, By locator, int timeoutInSeconds = 5)
         {
+            //returns element if the locator can be found once blockUI is gone else returns null
             try
             {
                 WebDriverWait myWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
