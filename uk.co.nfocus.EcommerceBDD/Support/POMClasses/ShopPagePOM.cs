@@ -34,7 +34,8 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             _item = item;
             try
             {
-                return _addToCart.Displayed;
+                _addToCart.Click();
+                return true;
             }
             catch
             {

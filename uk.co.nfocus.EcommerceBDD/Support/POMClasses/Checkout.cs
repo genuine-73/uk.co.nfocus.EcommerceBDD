@@ -157,8 +157,8 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
             catch (Exception)
             {
+                //Scrolls down to element in view and checks if the place Order has loaded up
                 ScrollElementIntoView(_driver, _checkPayments);
-                bool value = _checkPayments.Displayed;
                 _placeOrder.Click();
             }  
 

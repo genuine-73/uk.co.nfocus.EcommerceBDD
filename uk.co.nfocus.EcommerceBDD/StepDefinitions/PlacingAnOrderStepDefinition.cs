@@ -18,8 +18,8 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
     [Binding]
     internal class PlacingAnOrderStepDefinition
     {
+        //variable declaration 
         private readonly ScenarioContext _scenarioContext;
-
         private BillingDetailsPOCO _billingDetailsPOCO;
         private IWebDriver _driver;
         private NavBar _navbar;
@@ -27,13 +27,16 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
         private OrderReceived _orderPage;
         private MyAccount _myAccount;
         private AccountOrder latestOrderPage;
-        private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
+        private readonly ISpecFlowOutputHelper _specFlowOutputHelper; //displayes reporting in living doc
+
+
         public PlacingAnOrderStepDefinition(ScenarioContext scenarioContext, WDWrapper wrapper, BillingDetailsPOCO billingDetailsShared, ISpecFlowOutputHelper specFlowOutputHelper)
         {
             _scenarioContext = scenarioContext;
             this._driver = wrapper.Driver;
             _specFlowOutputHelper = specFlowOutputHelper;
         }
+
 
         [When(@"I fill the billing details to place an order in checkout")]
         public void FillOutBillingDetails(Table table)
@@ -43,9 +46,10 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _navbar.GoToCheckout();
             _specFlowOutputHelper.WriteLine("Successfully navigated to the checkout Page");
 
+            //Converts the inline table into a single instance of class
             _billingDetailsPOCO = table.CreateInstance<BillingDetailsPOCO>();
 
-            //Instantiating Checkour class and filling details
+            //Filling out all the necessary billing details
             _checkout = new Checkout(_driver);
             _checkout.FirstName = _billingDetailsPOCO.FirstName;
             _checkout.SecondName = _billingDetailsPOCO.SecondName;
@@ -56,15 +60,17 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             _checkout.PhoneNo= _billingDetailsPOCO.PhoneNo;
             _checkout.Email = _billingDetailsPOCO.Email;
 
+            //Checks all the necessary fields have been added
             Assert.Multiple(() =>
             {
-                Assert.That(_checkout.FirstName, Does.Not.EqualTo(""));
-                Assert.That(_checkout.SecondName, Does.Not.EqualTo(""));
-                Assert.That(_checkout.Country, Does.Not.EqualTo(""));
-                Assert.That(_checkout.Address, Does.Not.EqualTo(""));
-                Assert.That(_checkout.City, Does.Not.EqualTo(""));
-                Assert.That(_checkout.Postcode, Does.Not.EqualTo(""));
-                Assert.That(_checkout.PhoneNo, Does.Not.EqualTo(""));
+                Assert.That(_checkout.FirstName, Is.EqualTo(_billingDetailsPOCO.FirstName));
+                Assert.That(_checkout.SecondName, Is.EqualTo(_billingDetailsPOCO.SecondName));
+                Assert.That(_checkout.Country, Is.EqualTo(_billingDetailsPOCO.Country));
+                Assert.That(_checkout.Address, Is.EqualTo(_billingDetailsPOCO.Address));
+                Assert.That(_checkout.City, Is.EqualTo(_billingDetailsPOCO.City));
+                Assert.That(_checkout.Postcode, Is.EqualTo(_billingDetailsPOCO.Postcode));
+                Assert.That(_checkout.PhoneNo, Is.EqualTo(_billingDetailsPOCO.PhoneNo));
+                Assert.That(_checkout.Email, Is.EqualTo(_billingDetailsPOCO.Email));
             });
             _specFlowOutputHelper.WriteLine("Successfully filled out billing details");
         }
@@ -113,7 +119,8 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             string orderNo = (string)_scenarioContext["_orderNo"];
             try
             {
-                Assert.That(viewOrder.Substring(1, viewOrder.Length - 1), Is.EqualTo(orderNo), $"The order number from Checkout Page: {orderNo}, The order number from MyAccount->Orders: {viewOrder}");
+                //Checks to see whether the order summary matches the latest order in MyAccount->Orders
+                Assert.That(viewOrder.Substring(1, viewOrder.Length - 1), Is.EqualTo(orderNo), $"Failed: The order number from Checkout Page: {orderNo}, The order number from MyAccount->Orders: {viewOrder}");
                 _specFlowOutputHelper.WriteLine($"Passed: The order number from Checkout Page: {orderNo} matches MyAccount->Orders: {viewOrder}");
             }
             catch (Exception)

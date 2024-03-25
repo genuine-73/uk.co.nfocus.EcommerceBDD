@@ -94,6 +94,11 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             return (discountPercent / 100) * amount;
         }
 
+        public static decimal CalculateTotal(decimal subTotal, decimal discount, decimal shippingCost)
+        {
+            return (subTotal - discount) + shippingCost;
+        }
+
     }
 }
 

@@ -16,7 +16,7 @@ discount code and check that the total is correct after the discount & shipping 
 
 	When I navigate to the Shop page to add '<item>' to my cart
 		And I view cart to apply coupon '<coupon>'
-	Then I should get '<discount>'% off my selected item
+	Then I should get <discount>% deducted off my selected item
 
 Examples: 
 | item   | coupon    | discount |

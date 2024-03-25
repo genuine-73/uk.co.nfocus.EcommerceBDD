@@ -17,11 +17,11 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
     {
         private IWebDriver _driver;
         private readonly ScenarioContext _scenarioContext;
-        private NavBar _navbar;
+        private NavBar _navbar; 
         private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
         public AddAnItemToCartStepDefinition(ScenarioContext scenarioContext, WDWrapper wrapper, ISpecFlowOutputHelper specFlowOutputHelper)
         {
-            _scenarioContext = scenarioContext;
+            _scenarioContext = scenarioContext; 
             _driver = wrapper.Driver;
             _specFlowOutputHelper = specFlowOutputHelper;
 
@@ -38,14 +38,15 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             //Intialises shop object
             ShopPagePOM shopPage = new ShopPagePOM(_driver);
 
-            //If it exists, click the clothing item
+            //If item exists, add item to cart. Else, it performs cleanup and shuts down the browser
             bool value = shopPage.AddItemToCartSuccess(item);
             Assert.That(value, Is.EqualTo(true),$"Item: {item} does not exist");
 
-            shopPage.ClickAddToCart().CheckViewCart();
+            //Waits for View cart button to appear
+            shopPage.CheckViewCart();
             _specFlowOutputHelper.WriteLine("Successfully added an item to cart");
 
-            //Sharing value - to be used in applying a coupon step definition
+            //Shares value to ApplyingACoupon step definition
             _scenarioContext["item"] = item;
         }
     }

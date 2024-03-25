@@ -13,21 +13,14 @@ using OpenQA.Selenium.DevTools.V120.Browser;
 using OpenQA.Selenium.DevTools.V120.FedCm;      
 using static uk.co.nfocus.EcommerceBDD.Support.StaticHelperLib;
 
-//TODO:
-/*
-- Double check scenarios
-- Cart Cleanup -> think of if there is no coupon, Items in cart etc. best to seperate them out!  
 
-Further to this and more generally with try/catch and assertions – if you are always catching assertion errors and allowing the test to continue you can waste time. Try adding a non existent item to the cart (e.g. ‘Boo’) then place an order. Your test attempts to run far further than it can – it will e.g. navigate to the cart. When the requested item isn’t found execution should stop there for that test, and move on to the next.
-
-*/
 
 namespace uk.co.nfocus.EcommerceBDD.Support
 {
     [Binding]
     public class Hooks
     {
-        //declaring variables for all the classes that will be used
+        //variable declaration
         private IWebDriver _driver; 
         private readonly ScenarioContext _scenarioContext;
         private readonly WDWrapper _wrapper;
@@ -35,14 +28,14 @@ namespace uk.co.nfocus.EcommerceBDD.Support
         private MyAccount _myAccount;
         private Cart _cart;
 
-        //Initialises the variables when called 
+
         public Hooks(ScenarioContext scenarioContext, WDWrapper wrapper)
         {
             _scenarioContext = scenarioContext;
             _wrapper = wrapper;
         }
 
-        [Before] //Runs before every scenario
+        [Before] //Runs before every scenario    
         public void SetUp()
         {
 
@@ -86,12 +79,14 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             //Navigates to the homepage of E-commerce website
             string startURL = TestContext.Parameters["WebAppURL"];
             
+            //Sanitation check in case startURL is null
             if(startURL == null)
             {
                 startURL = "https://www.edgewordstraining.co.uk/demo-site/";
                 Console.WriteLine("URL has not been properly set \n default string has been passed to the URL");
             }
 
+            //Opens up the browser to the ecommerce site
             _driver.Url = startURL;
             Console.WriteLine("Successfully loads E-Commerce Page");
 
@@ -110,16 +105,11 @@ namespace uk.co.nfocus.EcommerceBDD.Support
                 //Clean up process. Getting rid of the coupon and all of the items from the cart      
                 _cart = new Cart(_driver);
                 _cart.CartCleanUp();
-                //string removeCoupon = _cart.RemoveCouponSuccess();
-                //Assert.That(removeCoupon, Does.Contain("removed"));
-
-                //_cart.DeleteItemsFromCart();
-                //bool itemsDeleted = _cart.RemoveItemSuccess();
-                //Assert.That(itemsDeleted, Is.EqualTo(true));
                 Console.WriteLine("Successfully removed the coupon and deleted items from the cart");
             }
             catch
             {
+                //Takes screenshot in case anything goes wrong during cleanup
                 TakeFullPageScreenshot(_driver, "CartCleanUpGoneWrong");
                 Console.WriteLine("Cart Clean Up Gone Wrong");
             }

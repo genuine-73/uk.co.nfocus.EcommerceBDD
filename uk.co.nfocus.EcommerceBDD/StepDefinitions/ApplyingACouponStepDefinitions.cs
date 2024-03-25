@@ -18,20 +18,21 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
     [Binding]
     internal class ApplyingACouponStepDefinitions
     {
+
+        //variable declaration
         private readonly ScenarioContext _scenarioContext;
         private IWebDriver _driver;
         private Cart _cart;
         private ShopPagePOM _shop;
         private string _item;
         private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
+        
         public ApplyingACouponStepDefinitions(ScenarioContext scenarioContext, WDWrapper wrapper, ISpecFlowOutputHelper specFlowOutputHelper)
         {
             this._scenarioContext = scenarioContext;
             this._driver = wrapper.Driver;
             this._specFlowOutputHelper = specFlowOutputHelper;
         }
-
-
 
         [When(@"I view cart to apply coupon '(.*)'")]
         public void EnterCouponCode(string coupon)
@@ -50,15 +51,16 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
 
         }
 
-        [Then(@"I should get '(.*)'% off my selected item")]
+        [Then(@"I should get (.*)% deducted off my selected item")]
         public void CheckDiscountsApplied(decimal discount)
         {
-
                          
             try
             {
-                // Test to see if discount works
+                // Calculates coupon discount
                 decimal calculateDiscount = CalculateDiscount(discount, _cart.SubTotal);
+
+                //Tests to see if the calculated discount has been applied properly
                 Assert.That(_cart.Discount, Is.EqualTo(calculateDiscount), $"Wrong Discount value. Expected: {calculateDiscount} but was {_cart.Discount}");
                 _specFlowOutputHelper.WriteLine("The discount applied is correct!");
                 
@@ -73,8 +75,10 @@ namespace uk.co.nfocus.EcommerceBDD.StepDefinitions
             
             try
             {
+                //Calculates total after discount's applied
+                decimal total = CalculateTotal(_cart.SubTotal, _cart.Discount, _cart.ShippingCost);
+
                 //Tests if the total calculated is correct  
-                decimal total = _cart.SubTotal - _cart.Discount + _cart.ShippingCost;
                 Assert.That(_cart.Total, Is.EqualTo(total), $"Total calculated is incorrect. Expected: {total} but was {_cart.Total}");
                 _specFlowOutputHelper.WriteLine("The total is correct!");
                 

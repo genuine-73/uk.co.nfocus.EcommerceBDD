@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace uk.co.nfocus.EcommerceBDD.Support.POCOs
 {
+    //Represents the share data to be injected in checkout billing details
     internal class BillingDetailsPOCO
     {
         public string FirstName { get; set; }

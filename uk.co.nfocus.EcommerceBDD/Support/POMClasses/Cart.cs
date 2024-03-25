@@ -18,9 +18,9 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
 {
     internal class Cart
     {
+        //variable declaration
         private IWebDriver _driver;
 
-        //Constructor
         public Cart(IWebDriver driver)
         {
             this._driver = driver;
@@ -139,34 +139,5 @@ namespace uk.co.nfocus.EcommerceBDD.Support.POMClasses
             }
             
         }
-
-
-        //Testing new characteristics
-        public string? RemoveCouponSuccess()
-        {
-            _removeCoupon.Click();
-            try
-            {
-                return _alertBanner.Text;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public bool RemoveItemSuccess()
-        {
-            try
-            {
-                return _returnToShop.Displayed;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-
     }
 }

@@ -127,7 +127,7 @@ this.FeatureBackground();
   testRunner.And(string.Format("I view cart to apply coupon \'{0}\'", coupon), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 19
- testRunner.Then(string.Format("I should get \'{0}\'% off my selected item", discount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I should get {0}% deducted off my selected item", discount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
