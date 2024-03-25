@@ -18,10 +18,10 @@ discount code and check that the total is correct after the discount & shipping 
 		And I view cart to apply coupon '<coupon>'
 	Then I should get <discount>% deducted off my selected item
 
-Examples: 
-| item   | coupon    | discount |
-| Belt   | edgewords | 15       |
-| Beanie | nfocus    | 25       |
+	Examples: 
+	| item   | coupon    | discount |
+	| Belt   | edgewords | 15       |
+	| Beanie | nfocus    | 25       |
  
 
 @TestCaseTwo
@@ -37,6 +37,6 @@ Orders’ section of the site
 	Then I should see an order summary of my latest order
 		And View the order I made in my orders tab in my account
 
-Examples: 
-| item |
-| Belt |
+	Examples: 
+	| item |
+	| Belt |

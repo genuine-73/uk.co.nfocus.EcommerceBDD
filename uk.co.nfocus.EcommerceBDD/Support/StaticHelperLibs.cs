@@ -76,11 +76,13 @@ namespace uk.co.nfocus.EcommerceBDD.Support
             jsdriver?.ExecuteScript("arguments[0].scrollIntoView()", element);
         }
 
+        // Calculates the discount of subtotal
         public static decimal CalculateDiscount(decimal discountPercent, decimal amount)
         {
             return (discountPercent / 100) * amount;
         }
 
+        //Calculates the total cost of cart after discount
         public static decimal CalculateTotal(decimal subTotal, decimal discount, decimal shippingCost)
         {
             return (subTotal - discount) + shippingCost;
