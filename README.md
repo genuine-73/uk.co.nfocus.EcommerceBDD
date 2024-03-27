@@ -27,5 +27,5 @@ Orders’ section of the site
 
 1. Install by cloning the project to your local repo using the command <git clone https://github.com/genuine-73/uk.co.nfocus.EcommerceBDD.git>
 2. Open terminal and navigate to uk.co.nfocus.EcommerceBDD/uk.co.nfocus.EcommerceBDD.csproj
-3. Run the command <dotnet test --settings "local.runsettings"> or simply <dotnet test>
+3. Run the command [dotnet test --settings "local.runsettings"] or simply [dotnet test]
 
